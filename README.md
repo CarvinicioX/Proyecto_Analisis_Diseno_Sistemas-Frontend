@@ -1,1 +1,2 @@
-# "npm install" y luego "ng serve"
+## npm install
+## ng serve para correr el servidor local
