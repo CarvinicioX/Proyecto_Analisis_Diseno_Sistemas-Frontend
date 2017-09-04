@@ -1,0 +1,40 @@
+<!-- Login Box-->
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <!-- Logo-->
+    <img class = "extra-margin-top logo" src="./assets/images/logo.png">
+    <!-- Message-->
+    <h3 class="extra-margin-top extra-margin-top">Bienvenido <br>Plataforma Virtual de Aprendizaje</h3>
+
+    <h2>Conectarse a la Plataforma</h2>
+
+    <!-- Login Form-->
+    <form [formGroup]="login_form" class="m-t" role="form" novalidate="novalidate">
+        <!-- Username Input-->
+        <div class="form-group">
+            <div [ngClass]="{'input-group':true, 'has-error':!login_form.controls['username_email'].valid && submitLogin, 'has-success':login_form.controls['username_email'].valid && submitLogin}">
+                <input [formControl]="login_form.controls['username_email']" type="text" class="form-control" placeholder="Usuario" maxlength="100">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+        <!-- End Username Input-->
+
+        <!-- Password Input-->
+        <div class="form-group">
+            <div [ngClass]="{'input-group':true, 'has-error':!login_form.controls['password'].valid && submitLogin, 'has-success':login_form.controls['password'].valid && submitLogin}">
+                <input [formControl]="login_form.controls['password']" type="password" class="form-control" placeholder="Contraseña" maxlength="25">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+            </div>
+        </div>
+        <!-- End Password Input-->
+
+        <!-- Login Button -->
+        <button (click)="login()" type="button" class="btn btn-primary block full-width m-b less-padding" [ladda]="loader" data-style="slide-left">Conectarse</button>
+
+        <!-- Sign Up-->
+        <p class="text-muted text-center">¿No tienes usuario?</p>
+        <a class="btn btn-sm btn-white btn-block" [routerLink]="['/register']">Registrarse</a>
+    </form>
+    <!-- End Login Form-->
+    <p class="m-t"><strong>Copyright</strong> Unitec &copy; 2017</p>
+</div>
+<!-- End Login Box-->

@@ -893,7 +893,7 @@ div.dt-button-info {
 .form-control, .single-line {
   background-color: #FFFFFF;
   background-image: none;
-  border: 1px solid #e5e6e7;
+  border: 1px solid #BEC0C1;
   border-radius: 1px;
   color: inherit;
   display: block;
@@ -907,7 +907,7 @@ div.dt-button-info {
 }
 
 .has-success .form-control, .has-success .form-control:focus {
-  border-color: $navy;
+  border-color: #3c763d;
 }
 
 .has-warning .form-control, .has-warning .form-control:focus {
@@ -932,7 +932,7 @@ div.dt-button-info {
 
 .input-group-addon {
   background-color: #fff;
-  border: 1px solid #E5E6E7;
+  border: 1px solid #BEC0C1;
   border-radius: 1px;
   color: inherit;
   font-size: 14px;

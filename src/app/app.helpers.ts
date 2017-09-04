@@ -1,6 +1,7 @@
 
 declare var jQuery:any;
 
+//correctHeight(): fix the height of main wrapper
 export function correctHeight() {
 
   var pageWrapper = jQuery('#page-wrapper');
@@ -28,6 +29,7 @@ export function correctHeight() {
   }
 }
 
+//detectBody(): detect windows size
 export function detectBody() {
   if (jQuery(document).width() < 769) {
     jQuery('body').addClass('body-small')
@@ -36,6 +38,7 @@ export function detectBody() {
   }
 }
 
+//smoothlyMenu(): add smooth fade in/out on navigation show/ide
 export function smoothlyMenu() {
   if (!jQuery('body').hasClass('mini-navbar') || jQuery('body').hasClass('body-small')) {
     // Hide menu in order to smoothly turn on when maximize menu

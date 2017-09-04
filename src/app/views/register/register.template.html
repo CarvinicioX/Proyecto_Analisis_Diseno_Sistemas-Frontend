@@ -1,0 +1,78 @@
+<!-- Register Box-->
+<div class="middle-box text-center loginscreen animated fadeInDown" ng-controller="RegisterController as registerController">
+    <div>
+        <img class = "extra-margin-top logo" src="./assets/images/logo.png">
+        <h3 class="extra-margin-top">Registrarse a la Plataforma</h3>
+        <h2>Formulario</h2>
+        <!-- Register Form (Model Drive Form)-->
+        <form [formGroup]="register_form" class="m-t" role="form" novalidate="novalidate"><!-- Register Form -->
+            <!-- Username Input -->
+            <div class="form-group">
+               <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['username'].valid && submitRegister), 'has-success':register_form.controls['username'].valid && submitRegister}">
+                   <input [formControl]="register_form.controls['username']" type="text" class="form-control" placeholder="Usuario" maxlength="25">
+                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
+               </div>
+           </div>
+           <!-- End Username Input -->
+           <!-- Email Input -->
+           <div class="form-group">
+               <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['email'].valid && submitRegister), 'has-success':register_form.controls['email'].valid && submitRegister}">
+                   <input [formControl]="register_form.controls['email']" type="email" class="form-control" placeholder="Correo Electrónico" maxlength="100">
+                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+               </div>
+               <p class="text-danger" *ngIf="register_form.controls['email'].hasError('email') && submitRegister">Correo Electrónico no válido.</p>
+           </div>
+           <!-- End Email Input -->
+           <!-- Password Input -->
+           <div class="form-group">
+               <div class = "input-group" [ngClass]="{'has-error':!register_form.controls['password'].valid && submitRegister, 'has-success':register_form.controls['password'].valid && submitRegister}">
+                   <input [formControl]="register_form.controls['password']" type="password" class="form-control" placeholder="Contraseña (8 caracteres)" maxlength="25">
+                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
+               </div>
+               <p class="text-danger" *ngIf="register_form.controls['password'].hasError('minlength') && submitRegister">La contraseña tiene que tener al menos 8 caracteres.</p>
+           </div>
+           <!-- End Password Input -->
+           <!-- Verify Password Input -->
+           <div class="form-group">
+               <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['confirm_password'].valid || register_form.hasError('mismatchedPasswords')) && submitRegister, 'has-success':register_form.controls['confirm_password'].valid && submitRegister && !register_form.hasError('mismatchedPasswords')}">
+                   <input [formControl]="register_form.controls['confirm_password']" type="password" class="form-control" placeholder="Confirmar Contraseña" maxlength="25">
+                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
+               </div>
+               <p class="text-danger" *ngIf="register_form.hasError('mismatchedPasswords') && submitRegister && register_form.controls['password'].valid">Las contraseñas tienen que ser iguales.</p>
+           </div>
+           <!-- End Verify Password Input -->
+           <!-- Terms and Conditions -->
+           <label>Al crear un usuario, usted acepta los <a (click)="terms_conditions_modal.show()">Términos y Referencias</a> de la plataforma virtual de aprendizaje.</label>
+           <!-- Submit register form -->
+           <button  (click)="register()" type="button" class="extra-margin-top btn btn-primary block full-width m-b less-padding" [ladda]="loader" data-style="slide-left"><strong>Crear Usuario</strong></button>
+
+           <p class="text-muted text-center">¿Ya tienes un usuario?</p>
+           <a class="btn btn-sm btn-white btn-block" [routerLink]="['/login']">Conectarse</a>
+       </form>
+       <!-- End Register Form -->
+       <p class="m-t"><strong>Copyright</strong> UNITEC &copy; 2017</p>
+   </div>
+
+</div>
+<!-- End Register Box -->
+
+<!-- Terms and Conditions Modal -->
+<div bsModal #terms_conditions_modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closeModal3 type="button" class="close pull-right" (click)="terms_conditions_modal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="text-center"><strong>Términos y Referencias</strong></h2>
+                <h4 class="text-center">Vinicio is gay as fuck.</h4>
+                <div class="text-center">
+                    <a (click)="terms_conditions_modal.hide()" class="btn btn-warning custom-wizard-button"><i class="fa fa-arrow-left"></i> Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Terms and Conditions Modal -->

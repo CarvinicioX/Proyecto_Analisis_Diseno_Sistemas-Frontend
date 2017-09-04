@@ -1,6 +1,8 @@
+//Native Imports
 import { Component } from '@angular/core';
-import { detectBody } from '../../../app.helpers';
 
+//Third party libraries imports
+import { detectBody } from '../../../app.helpers';
 declare var jQuery:any;
 
 @Component({
@@ -12,11 +14,15 @@ declare var jQuery:any;
 })
 export class BasicLayoutComponent {
 
+
   public ngOnInit():any {
+    //Check if body size needs size fix
     detectBody();
   }
 
+  //onResize()
   public onResize(){
+    //Check if body size needs size fix
     detectBody();
   }
 

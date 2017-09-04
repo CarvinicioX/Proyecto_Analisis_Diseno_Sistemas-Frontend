@@ -1,18 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+//Native Imports
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 import {RouterModule} from "@angular/router";
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-
 import {ROUTES} from "./app.routes";
-import { AppComponent } from './app.component';
 
-// App views
-import {DashboardsModule} from "./views/dashboards/dashboards.module";
-import {AppviewsModule} from "./views/appviews/appviews.module";
-
-// App modules/components
+//Components and Modules Imports
+import {AppComponent} from './app.component';
+import {LoginModule} from "./views/login/login.module";
+import {RegisterModule} from "./views/register/register.module";
+import {NewRequestModule} from "./views/new_request/new_request.module";
+import {HomeModule} from "./views/home/home.module";
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 
 @NgModule({
@@ -22,10 +22,13 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    DashboardsModule,
     LayoutsModule,
-    AppviewsModule,
+    LoginModule,
+    RegisterModule,
+    NewRequestModule,
+    HomeModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

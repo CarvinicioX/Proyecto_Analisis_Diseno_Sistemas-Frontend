@@ -8,6 +8,12 @@
   color: #999c9e;
 }
 
+.nav.navbar-right > li{
+  color: #999c9e;
+  font-weight: 600;
+}
+
+
 .nav > li.active > a {
   color: #ffffff;
 }
@@ -34,8 +40,10 @@
 }
 
 .navbar-default {
-  background-color: transparent;
+  background-color: $nav;
+  height:100vh;
   border-color: $nav-bg;
+  position:fixed;
 }
 
 .navbar-top-links li {

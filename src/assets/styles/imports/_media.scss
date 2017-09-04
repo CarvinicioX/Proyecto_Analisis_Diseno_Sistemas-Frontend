@@ -7,17 +7,17 @@
 
   .navbar-static-side {
     z-index: 2001;
-    position: absolute;
     width: $sidebar-width;
   }
-
-  .navbar-top-links .dropdown-messages,
-  .navbar-top-links .dropdown-tasks,
-  .navbar-top-links .dropdown-alerts {
-    margin-left: auto;
+}
+@media (max-width: 800px) {
+  .right-corner {
+    display:none;
+  }
+  .left-corner {
+    display:none;
   }
 }
-
 @media (max-width: 768px) {
 
   #page-wrapper {
@@ -29,7 +29,6 @@
   .body-small .navbar-static-side {
     display: none;
     z-index: 2001;
-    position: absolute;
     width: 70px;
   }
 
@@ -87,7 +86,7 @@
     -o-transition: background-color 500ms linear;
     -ms-transition: background-color 500ms linear;
     transition: background-color 500ms linear;
-    background-color: #f3f3f4
+    background-color: #fff;
   }
 
 }

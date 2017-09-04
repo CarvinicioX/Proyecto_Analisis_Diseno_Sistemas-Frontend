@@ -1,11 +1,163 @@
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2f4050;
+  background-color: #fff;
   font-size: 13px;
   color: $text-color;
   overflow-x: hidden;
 
 }
+
+.hover-icon{
+  cursor:pointer;
+}
+
+.green-code{
+  color: #04B486;
+}
+
+.blue-code{
+  color: #01A9DB;
+}
+
+.orange-code{
+  color: #FACC2E;
+}
+
+.code-font{
+  font-size:20px;
+}
+
+.custom-gray-bg{
+  background-color: #2E2E2E;
+}
+
+.user-icon{
+  width:100px;
+}
+
+.showing{
+  margin-left:10px;
+}
+
+.feed-footer{
+  margin-top:10px;
+}
+
+.extra-margin-top{
+  margin-top:15px;
+}
+
+.extra-margin-left{
+  margin-left:25px;
+}
+
+.extra-padding-top{
+  padding-top:15px;
+}
+
+.less-padding{
+  padding: 5px 5px 5px 5px !important;
+}
+
+.myPdf{
+  width:100%;
+  height: 60vh;
+}
+
+.logo{
+  width:100%;
+}
+
+.main-button{
+  width:100%;
+}
+
+.noHover:hover{
+  background-color:transparent !important;
+}
+
+.nav-pills > li.active {
+    background: #337ab7 !important;
+}
+
+.modal{
+  background: rgba(0,0,0,0.6);
+}
+
+.custom-add{
+  margin-top:5px;
+}
+
+.custom-wizard{
+  margin-top:15px;
+}
+
+.custom-wizard-button{
+  margin-top:25px;
+  margin-bottom:25px;
+}
+
+.custom-wizard-content{
+  padding-left:10%;
+  padding-right:10%;
+}
+
+.request-image{
+  display: block;
+  margin-right:auto;
+  margin-left:auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  width:100%;
+  max-width:170px;
+  height:auto;
+  box-shadow: -5px 5px 3px grey;
+}
+
+.white-text{
+  color:#fff !important;
+}
+
+.gray-text{
+  color:#676a6c;
+}
+
+.inherit-logo{
+  width:inherit;
+}
+
+.right-corner {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width:350px;
+}
+
+.spinnerBox > .sk-spinner {
+  display: none;
+}
+.spinnerBox.sk-loading {
+  position: relative;
+}
+.spinnerBox.sk-loading:after {
+  content: '';
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.spinnerBox.sk-loading > .sk-spinner {
+  display: block;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+}
+
+/* MY CUSTOM CSS END */
 
 html, body {
   height: 100%;
@@ -22,7 +174,6 @@ body.full-height-layout #page-wrapper {
 }
 
 body.boxed-layout {
-  background: $boxed-background;
 }
 
 body.boxed-layout #wrapper {
