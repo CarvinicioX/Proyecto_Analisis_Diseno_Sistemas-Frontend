@@ -17,7 +17,34 @@ export class AdminAlumnosService {
   constructor(private http: Http) {}
 
   //Port where the backend server is  running
-  private baseUrl: string = "";
+  private baseUrl: string = "http://localhost:8000";
+
+  insert_alumno(payload: any):Observable<any>{
+      let bodyString = JSON.stringify(payload);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.baseUrl+"/insert_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  update_alumno(payload: any):Observable<any>{
+      let bodyString = JSON.stringify(payload);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.baseUrl+"/update_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  delete_alumno(payload: any):Observable<any>{
+      let bodyString = JSON.stringify(payload);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.baseUrl+"/delete_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  get_alumnos():Observable<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.get(this.baseUrl+"/get_alumnos", options).map(this.extractData).catch(this.handleError);
+  }
 
   //Extract data as Json object
   private extractData(res:Response) {

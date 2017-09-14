@@ -26,7 +26,61 @@ export class AgregarAlumnosComponent implements OnInit{
 	}
 
 	ngOnInit() {
+  }
+
+  agregar_alumno(){
+    if(this.agregar_alumnos_form.valid){
+      this.submit_add = true;
+      var nacimiento_temp = new Date(this.agregar_alumnos_form.controls['nacimiento'].value);
+      var date_string = nacimiento_temp.toISOString().slice(0, 10).replace('T', ' ');
+      var load = {
+        nombres:this.agregar_alumnos_form.controls['nombres'].value, 
+        apellidos:this.agregar_alumnos_form.controls['apellidos'].value, 
+        nacimiento: date_string,
+        departamento: this.agregar_alumnos_form.controls['departamento'].value
+      };
+      var response;
+      this.service.insert_alumno(load).subscribe(
+        //store response
+        data => response = data,
+        err => console.log(err),
+        ()=> {
+            if(response && response!=-1){//if not null, undefined,  or error
+              this.agregar_success();
+            }else{
+              this.internalServerError();
+            }
+        }
+      );
+    }else{
+      this.submit_add = true;
     }
+  }
 
+  clear_alumno(){
+    this.agregar_alumnos_form.controls['nombres'].setValue("");
+    this.agregar_alumnos_form.controls['apellidos'].setValue("");
+    this.agregar_alumnos_form.controls['nacimiento'].setValue("");
+    this.agregar_alumnos_form.controls['departamento'].setValue("");
+    this.submit_add = false;
+  }
 
+  agregar_success() {
+      swal({
+          title: "Agregado Exitosamente",
+          text: "Alumno agregado de forma exitosa.",
+          confirmButtonText: '<i class="fa fa-thumbs-up"></i> Regresar',
+          allowOutsideClick: false,
+          type: "success"
+      }).then(()=>{this.clear_alumno();})
+  }
+
+  internalServerError() {
+    swal({
+          title: "Error Interno del Servidor",
+          text: "Error interno del servidor, por favor vuelva a intentarlo o contacte a su administrador.",
+          type: "warning",
+          allowOutsideClick: false
+      }).catch(swal.noop)
+  }
 }
