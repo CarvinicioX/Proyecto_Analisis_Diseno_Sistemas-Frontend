@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { default as swal } from 'sweetalert2';
 
 @Component({
-  selector: 'new_request',
-  templateUrl: 'new_request.template.html'
+  selector: 'admin_maestros',
+  templateUrl: 'admin_maestros.template.html'
 })
 
 
-export class NewRequestComponent implements OnInit{
+export class AdminMaestrosComponent implements OnInit{
 
 	constructor(private router:Router){
 	}

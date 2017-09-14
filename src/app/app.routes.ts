@@ -4,18 +4,30 @@ import {Routes} from "@angular/router";
 //Component Imports
 import {LoginComponent} from "./views/login/login.component";
 import {RegisterComponent} from "./views/register/register.component";
-import {NewRequestComponent} from "./views/new_request/new_request.component";
+import {AdministracionComponent} from "./views/administracion/administracion.component";
 import {HomeComponent} from "./views/home/home.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
+import {AdminSeccionesComponent} from "./views/admin_secciones/admin_secciones.component";
+import {AdminAlumnosComponent} from "./views/admin_alumnos/admin_alumnos.component";
+import {AdminClasesComponent} from "./views/admin_clases/admin_clases.component";
+import {AdminGradosComponent} from "./views/admin_grados/admin_grados.component";
+import {AdminMaestrosComponent} from "./views/admin_maestros/admin_maestros.component";
+import {AdminPadresComponent} from "./views/admin_padres/admin_padres.component";
 
 
 export const ROUTES:Routes = [
   	{path: 'login', component: LoginComponent},
   	{path: 'register', component: RegisterComponent},
-  	{path: 'dashboard', component: BasicLayoutComponent, 
+  	{path: 'plataforma', component: BasicLayoutComponent, 
     children: [
-      	{path: 'new_request', component: NewRequestComponent},
-      	{path: 'home', component: HomeComponent}
+      	{path: 'administracion', component: AdministracionComponent},
+      	{path: 'inicio', component: HomeComponent},
+      	{path: 'admin_secciones', component: AdminSeccionesComponent},
+        {path: 'admin_alumnos', component: AdminAlumnosComponent},
+        {path: 'admin_clases', component: AdminClasesComponent},
+        {path: 'admin_grados', component: AdminGradosComponent},
+        {path: 'admin_maestros', component: AdminMaestrosComponent},
+        {path: 'admin_padres', component: AdminPadresComponent}
     ]
   },
   {path: '**',  redirectTo: 'login'}

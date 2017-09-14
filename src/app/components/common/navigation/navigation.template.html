@@ -3,9 +3,9 @@
   <div class="sidebar-collapse">
     <ul class="nav metismenu" id="side-menu">
       <!-- Navbar Header-->
-      <li class="nav-header">
+      <li class="nav-header no-padding grey-border">
         <div class="profile-element">
-          <img class = "logo" src="./assets/images/logo.png">
+          <img class = "logo" src="./assets/images/nav-header.png">
         </div>
         <div class="logo-element">
          Menú
@@ -13,11 +13,11 @@
       </li>
       <!-- End Navbar Header -->
       <!-- Navbar Items -->
-      <li  [ngClass]="{active: activeRoute('home')}">
-        <a [routerLink]="['/dashboard/home']"><i class="fa fa-comment"></i> <span class="nav-label">Notificaciones</span></a>
+      <li  [ngClass]="{active: activeRoute('inicio')}">
+        <a [routerLink]="['/plataforma/inicio']"><i class="fa fa-comment"></i> <span class="nav-label">Notificaciones</span></a>
       </li>
-      <li [ngClass]="{active: activeRoute('new_request')}">
-        <a [routerLink]="['/dashboard/new_request']"><i class="fa fa-cogs"></i> <span class="nav-label">Administración</span></a>
+      <li [ngClass]="{active: activeRoute('administracion')||activeRoute('admin_secciones')||activeRoute('admin_alumnos') ||activeRoute('admin_grados') ||activeRoute('admin_clases')||activeRoute('admin_maestros')||activeRoute('admin_padres')}">
+        <a [routerLink]="['/plataforma/administracion']"><i class="fa fa-cogs"></i> <span class="nav-label">Administración</span></a>
       </li>
       <!-- End Navbar Items -->
     </ul>

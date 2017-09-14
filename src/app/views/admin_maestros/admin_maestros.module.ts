@@ -2,11 +2,11 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
-import {NewRequestComponent} from "./new_request.component";
+import {AdminMaestrosComponent} from "./admin_maestros.component";
 import {LaddaModule} from 'angular2-ladda';
 @NgModule({
   declarations: [
-    NewRequestComponent
+    AdminMaestrosComponent
   ],
   imports: [
     BrowserModule,
@@ -16,9 +16,9 @@ import {LaddaModule} from 'angular2-ladda';
     LaddaModule
   ],
   exports: [
-    NewRequestComponent
+    AdminMaestrosComponent
   ],
 })
 
-export class NewRequestModule {
+export class AdminMaestrosModule {
 }

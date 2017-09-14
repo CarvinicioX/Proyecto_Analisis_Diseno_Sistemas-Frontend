@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit{
   login(){
     //Verifies if login_form is valid
     if(this.login_form.valid){
-      this.router.navigateByUrl('/dashboard/home');
+      this.router.navigateByUrl('/plataforma/inicio');
     }else{
       //Sets submitLogin as TRUE if login_form is not valid
       this.submitLogin = true;
