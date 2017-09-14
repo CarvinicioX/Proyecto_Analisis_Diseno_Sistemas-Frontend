@@ -1,0 +1,96 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><i class="fa fa-plus"></i> Agregar Alumnos</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>En esta sección se agregan los alumnos de la plataforma.</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well white-bg animated fadeInRight">
+                <h3>Formulario de Ingreso de Alumno</h3>
+                <form [formGroup]="agregar_alumnos_form" class="m-t" role="form" novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label>ID Alumno</label>
+                                <div class = "input-group">
+                                    <input [formControl]="agregar_alumnos_form.controls['id']" type="text" class="form-control">
+                                    <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label>Nacimiento *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_alumnos_form.controls['nacimiento'].valid && submit_add, 'has-success':agregar_alumnos_form.controls['nacimiento'].valid && submit_add}">
+                                    <input [formControl]="agregar_alumnos_form.controls['nacimiento']" type="date" class="form-control" placeholder="Ingrese un valor" maxlength="50" max="2020-12-31">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                </div>
+                            </div>
+                            <span class="text-danger" *ngIf="!agregar_alumnos_form.controls['nacimiento'].valid && submit_add">La fecha de nacimiento es requerida.</span> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Departamento *</label>
+                                <select [formControl]="agregar_alumnos_form.controls['departamento']" class="form-control">
+                                    <option value="" disabled="true">Seleccionar...</option>
+                                    <option>Atlántida</option>
+                                    <option>Choluteca</option>
+                                    <option>Colón</option>
+                                    <option>Comayagua</option>
+                                    <option>Copán</option>
+                                    <option>Cortes</option>
+                                    <option>El Paraíso</option>
+                                    <option>Francisco Morazán</option>
+                                    <option>Gracias a Dios</option>
+                                    <option>Intibucá</option>
+                                    <option>Islas de la Bahía</option>
+                                    <option>La Paz</option>
+                                    <option>Lempira</option>
+                                    <option>Ocotepeque</option>
+                                    <option>Olancho</option>
+                                    <option>Santa Bárbara</option>
+                                    <option>Valle</option>
+                                    <option>Yoro</option>
+                                </select>
+                            </div>
+                            <span class="text-danger" *ngIf="!agregar_alumnos_form.controls['departamento'].valid && submit_add">El departamento es requerido.</span> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nombres *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_alumnos_form.controls['nombres'].valid && submit_add, 'has-success':agregar_alumnos_form.controls['nombres'].valid && submit_add}">
+                                    <input [formControl]="agregar_alumnos_form.controls['nombres']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                </div>
+                            </div>
+                            <span class="text-danger" *ngIf="!agregar_alumnos_form.controls['nombres'].valid && submit_add">El nombre del alumno es requerido.</span> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Apellidos *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_alumnos_form.controls['apellidos'].valid && submit_add, 'has-success':agregar_alumnos_form.controls['apellidos'].valid && submit_add}">
+                                    <input [formControl]="agregar_alumnos_form.controls['apellidos']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                </div>
+                            </div>
+                            <span class="text-danger" *ngIf="!agregar_alumnos_form.controls['apellidos'].valid && submit_add">El apellido del alumno es requerido.</span> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+                        </div>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+</div>

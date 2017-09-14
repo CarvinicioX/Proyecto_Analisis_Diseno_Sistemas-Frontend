@@ -1,3 +1,16 @@
 .grey-border{
 	border: 1px solid #41576C;
 }
+
+.widget-element{
+	cursor:pointer;
+}
+
+.widget-element:hover{
+	-webkit-filter: brightness(70%);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 05s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
