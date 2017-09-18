@@ -20,6 +20,11 @@ import {AdminSeccionesComponent} from "./views/admin_secciones/admin_secciones.c
 import {AdminClasesComponent} from "./views/admin_clases/admin_clases.component";
 //Grados
 import {AdminGradosComponent} from "./views/admin_grados/admin_grados.component";
+import {AgregarGradosComponent} from "./views/admin_grados/agregar_grados/agregar_grados.component";
+import {BuscarGradosComponent} from "./views/admin_grados/buscar_grados/buscar_grados.component";
+import {EliminarGradosComponent} from "./views/admin_grados/eliminar_grados/eliminar_grados.component";
+import {ModificarGradosComponent} from "./views/admin_grados/modificar_grados/modificar_grados.component";
+
 //Maestros
 import {AdminMaestrosComponent} from "./views/admin_maestros/admin_maestros.component";
 //Padres
@@ -39,6 +44,10 @@ export const ROUTES:Routes = [
         {path: 'admin_alumnos/buscar_alumnos', component: BuscarAlumnosComponent},
         {path: 'admin_alumnos/eliminar_alumnos', component: EliminarAlumnosComponent},
         {path: 'admin_alumnos/modificar_alumnos', component: ModificarAlumnosComponent},
+        {path: 'admin_grados/agregar_grados', component: AgregarGradosComponent},
+        {path: 'admin_grados/buscar_grados', component: BuscarGradosComponent},
+        {path: 'admin_grados/eliminar_grados', component: EliminarGradosComponent},
+        {path: 'admin_grados/modificar_grados', component: ModificarGradosComponent},
         {path: 'admin_clases', component: AdminClasesComponent},
         {path: 'admin_grados', component: AdminGradosComponent},
         {path: 'admin_maestros', component: AdminMaestrosComponent},
