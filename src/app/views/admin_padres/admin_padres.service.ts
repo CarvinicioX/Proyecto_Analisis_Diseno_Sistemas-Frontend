@@ -40,7 +40,7 @@ export class AdminPadresService {
       return this.http.post(this.baseUrl+"/delete_padre",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  get_padre():Observable<any>{
+  get_padres():Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       return this.http.get(this.baseUrl+"/get_padres", options).map(this.extractData).catch(this.handleError);
