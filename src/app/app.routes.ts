@@ -18,6 +18,10 @@ import {ModificarAlumnosComponent} from "./views/admin_alumnos/modificar_alumnos
 import {AdminSeccionesComponent} from "./views/admin_secciones/admin_secciones.component";
 //Clases
 import {AdminClasesComponent} from "./views/admin_clases/admin_clases.component";
+import {AgregarClasesComponent} from "./views/admin_clases/agregar_clases/agregar_clases.component";
+import {BuscarClasesComponent} from "./views/admin_clases/buscar_clases/buscar_clases.component";
+import {EliminarClasesComponent} from "./views/admin_clases/eliminar_clases/eliminar_clases.component";
+import {ModificarClasesComponent} from  "./views/admin_clases/modificar_clases/modificar_clases.component";
 //Grados
 import {AdminGradosComponent} from "./views/admin_grados/admin_grados.component";
 import {AgregarGradosComponent} from "./views/admin_grados/agregar_grados/agregar_grados.component";
@@ -27,6 +31,11 @@ import {ModificarGradosComponent} from "./views/admin_grados/modificar_grados/mo
 
 //Maestros
 import {AdminMaestrosComponent} from "./views/admin_maestros/admin_maestros.component";
+import {EliminarMaestrosComponent} from "./views/admin_maestros/eliminar_maestros/eliminar_maestros.component";
+import {ModificarMaestrosComponent} from "./views/admin_maestros/modificar_maestros/modificar_maestros.component";
+import {AgregarMaestrosComponent} from "./views/admin_maestros/agregar_maestros/agregar_maestros.component";
+import {BuscarMaestrosComponent} from "./views/admin_maestros/buscar_maestros/buscar_maestros.component";
+
 //Padres
 import {AdminPadresComponent} from "./views/admin_padres/admin_padres.component";
 
@@ -49,8 +58,16 @@ export const ROUTES:Routes = [
         {path: 'admin_grados/eliminar_grados', component: EliminarGradosComponent},
         {path: 'admin_grados/modificar_grados', component: ModificarGradosComponent},
         {path: 'admin_clases', component: AdminClasesComponent},
+         {path: 'admin_clases/agregar_clases', component: AgregarClasesComponent},
+        {path: 'admin_clases/buscar_clases', component: BuscarClasesComponent},
+        {path: 'admin_clases/eliminar_clases', component: EliminarClasesComponent},
+        {path: 'admin_clases/modificar_clases', component: ModificarClasesComponent},
         {path: 'admin_grados', component: AdminGradosComponent},
         {path: 'admin_maestros', component: AdminMaestrosComponent},
+        {path: 'admin_maestros/eliminar_maestros', component: EliminarMaestrosComponent},
+        {path: 'admin_maestros/modificar_maestros', component: ModificarMaestrosComponent},
+        {path: 'admin_maestros/agregar_maestros', component: AgregarMaestrosComponent},
+        {path: 'admin_maestros/buscar_maestros', component: BuscarMaestrosComponent},
         {path: 'admin_padres', component: AdminPadresComponent}
     ]
   },

@@ -42,7 +42,7 @@ export class AdminClasesService {
   get_clases():Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.baseUrl+"/get_alumnos", options).map(this.extractData).catch(this.handleError);
+      return this.http.get(this.baseUrl+"/get_clases", options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object
