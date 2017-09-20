@@ -21,10 +21,10 @@ export class EliminarPadresComponent implements OnInit{
     private temp_padres:any;
     private search_string:string;
     private padre_nombre:string;
-    private padre_apellido:string;
-    private padre_id:number;
-    private padre_departamento:string;
-    private padre_nacimiento:string;
+    private padre_telefono:string;
+    private IDpadre:number;
+    private padre_direccion:string;
+    private padre_correo:string;
 
 	constructor(private router:Router, private service:AdminPadresService){
 		this.order = "";
@@ -36,10 +36,10 @@ export class EliminarPadresComponent implements OnInit{
 		this.temp_padres = [];
 		this.search_string = "";
 		this.padre_nombre = "";
-    	this.padre_apellido = "";
-    	this.padre_nacimiento = "";
-    	this.padre_departamento = "";
-    	this.padre_id = null;
+    	this.padre_telefono = "";
+    	this.padre_direccion = "";
+    	this.padre_correo = "";
+    	this.IDpadre = null;
 	}
 
 	ngOnInit() {
@@ -48,7 +48,7 @@ export class EliminarPadresComponent implements OnInit{
     }
 
     eliminar_padre(){
-    	var load = {padre_id:this.padre_id};
+    	var load = {IDpadre:this.IDpadre};
     	var response;
         this.service.delete_padre(load).subscribe(
             //store response
@@ -57,21 +57,21 @@ export class EliminarPadresComponent implements OnInit{
             ()=> {
                 if(response && response != -1){//if not null
                 	for(var i = 0; i<this.padres.length;i++){
-			    		if(this.padres[i].padre_id == this.padre_id){
+			    		if(this.padres[i].IDpadre == this.IDpadre){
 			    			this.padres.splice(i,1);
 			    		}
 			    	}
 			    	for(var i = 0; i<this.temp_padres.length;i++){
-			    		if(this.temp_padres[i].padre_id == this.padre_id){
+			    		if(this.temp_padres[i].IDpadre == this.IDpadre){
 			    			this.temp_padres.splice(i,1);
 			    		}
 			    	}
 			    	this.update_offsets();
 			    	this.padre_nombre = "";
-			    	this.padre_apellido = "";
-			    	this.padre_nacimiento = "";
-			    	this.padre_departamento = "";
-			    	this.padre_id = null;
+			    	this.padre_telefono = "";
+			    	this.padre_direccion = "";
+			    	this.padre_correo = "";
+			    	this.IDpadre = null;
 			    	this.eliminar_success();
                 }else{
                 	this.internalServerError();
@@ -123,18 +123,18 @@ export class EliminarPadresComponent implements OnInit{
     }
 
     set_padre(id){
-    	this.padre_nombre = this.padres[id].nombres;
-    	this.padre_apellido = this.padres[id].apellidos;
-    	this.padre_departamento = this.padres[id].departamento;
-    	this.padre_nacimiento = this.padres[id].nacimiento.substring(0,10);
-    	this.padre_id = this.padres[id].padre_id;
+    	this.padre_nombre = this.padres[id].nombre;
+    	this.padre_telefono = this.padres[id].telefono;
+    	this.padre_correo = this.padres[id].correo;
+    	this.padre_direccion = this.padres[id].direccion;
+    	this.IDpadre = this.padres[id].IDpadre;
     }
 
     search_padre(){
     	this.padres = [];
     	if(this.search_string.trim().length > 0){
     		for(var i = 0; i<this.temp_padres.length;i++){
-	    		if(this.temp_padres[i].nombres.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_padres[i].apellidos.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_padres[i].padre_id+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
+	    		if(this.temp_padres[i].nombres.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_padres[i].apellidos.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_padres[i].IDpadre+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
 	    			this.padres.push(this.temp_padres[i]);
 	    		}
 	    	}
@@ -198,8 +198,8 @@ export class EliminarPadresComponent implements OnInit{
 
     sort_id_asc(){
         this.padres.sort(function(a, b){
-            var x = a.padre_id;
-            var y = b.padre_id;
+            var x = a.IDpadre;
+            var y = b.IDpadre;
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -208,8 +208,8 @@ export class EliminarPadresComponent implements OnInit{
 
     sort_id_desc(){
         this.padres.sort(function(a, b){
-            var x = a.padre_id;
-            var y = b.padre_id;
+            var x = a.IDpadre;
+            var y = b.IDpadre;
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;

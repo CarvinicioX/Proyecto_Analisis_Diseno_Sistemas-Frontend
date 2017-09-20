@@ -17,66 +17,45 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group form-group-margins">
-                                <label>Nombres *</label>
-                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['nombres'].valid && submit_add, 'has-success':agregar_padres_form.controls['nombres'].valid && submit_add}">
-                                    <input [formControl]="agregar_padres_form.controls['nombres']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
+                                <label>Nombre *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['nombre'].valid && submit_add, 'has-success':agregar_padres_form.controls['nombre'].valid && submit_add}">
+                                    <input [formControl]="agregar_padres_form.controls['nombre']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 </div>
                             </div>
-                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['nombres'].valid && submit_add">El nombre del padre es requerido.</p> 
+                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['nombre'].valid && submit_add">El nombre del padre es requerido.</p> 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-margins">
-                                <label>Apellidos *</label>
-                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['apellidos'].valid && submit_add, 'has-success':agregar_padres_form.controls['apellidos'].valid && submit_add}">
-                                    <input [formControl]="agregar_padres_form.controls['apellidos']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <label>Telefono *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['telefono'].valid && submit_add, 'has-success':agregar_padres_form.controls['telefono'].valid && submit_add}">
+                                    <input [formControl]="agregar_padres_form.controls['telefono']" type="number" class="form-control" placeholder="Ingrese un valor" maxlength="50">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                 </div>
                             </div>
-                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['apellidos'].valid && submit_add">El apellido del padre es requerido.</p> 
+                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['telefono'].valid && submit_add">El telefono del padre es requerido.</p> 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group form-group-margins">
-                                <label>Departamento *</label>
-                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['departamento'].valid && submit_add, 'has-success':agregar_padres_form.controls['departamento'].valid && submit_add}">
-                                    <select [formControl]="agregar_padres_form.controls['departamento']" class="form-control">
-                                        <option value="" disabled="true">Seleccionar...</option>
-                                        <option>Atlántida</option>
-                                        <option>Choluteca</option>
-                                        <option>Colón</option>
-                                        <option>Comayagua</option>
-                                        <option>Copán</option>
-                                        <option>Cortes</option>
-                                        <option>El Paraíso</option>
-                                        <option>Francisco Morazán</option>
-                                        <option>Gracias a Dios</option>
-                                        <option>Intibucá</option>
-                                        <option>Islas de la Bahía</option>
-                                        <option>La Paz</option>
-                                        <option>Lempira</option>
-                                        <option>Ocotepeque</option>
-                                        <option>Olancho</option>
-                                        <option>Santa Bárbara</option>
-                                        <option>Valle</option>
-                                        <option>Yoro</option>
-                                    </select>
-                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                <label>Direccion*</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['direccion'].valid && submit_add, 'has-success':agregar_padres_form.controls['direccion'].valid && submit_add}">
+                                    <input [formControl]="agregar_padres_form.controls['direccion']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
+                                    <span class="input-group-addon"><i class="fa fa-location"></i></span>
                                 </div>
-                                
                             </div>
-                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['departamento'].valid && submit_add">El departamento es requerido.</p> 
+                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['direccion'].valid && submit_add">La direccion es requerida.</p> 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-margins">
-                                <label>Nacimiento *</label>
-                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['nacimiento'].valid && submit_add, 'has-success':agregar_padres_form.controls['nacimiento'].valid && submit_add}">
-                                    <input [formControl]="agregar_padres_form.controls['nacimiento']" type="date" class="form-control">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <label>Correo *</label>
+                                <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['correo'].valid && submit_add, 'has-success':agregar_padres_form.controls['correo'].valid && submit_add}">
+                                    <input [formControl]="agregar_padres_form.controls['correo']" type="email" class="form-control">
+                                    <span class="input-group-addon"><i class="fa fa-mail"></i></span>
                                 </div>
                             </div>
-                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['nacimiento'].valid && submit_add">La fecha de nacimiento es requerida.</p> 
+                            <p class="text-danger" *ngIf="!agregar_padres_form.controls['correo'].valid && submit_add">El correo es requerido.</p> 
                         </div>
                     </div>
                     <div class="row margin-top-15">

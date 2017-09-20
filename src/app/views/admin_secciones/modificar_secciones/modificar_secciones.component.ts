@@ -26,11 +26,11 @@ export class ModificarSeccionesComponent implements OnInit{
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService){
         this.submit_add = false;
             this.agregar_secciones_form = form_builder.group({
-            'nombres' : ["", Validators.required],
-            'apellidos' : ["", Validators.required],
-            'nacimiento' : ["", Validators.required],
-            'departamento' : ["", Validators.required],
-            'seccion_id':["", Validators.required]
+            'IDgrado' : ["", Validators.required],
+            'IDmaestro' : ["", Validators.required],
+            'IDclase' : ["", Validators.required],
+            'anio' : ["", Validators.required],
+            'IDseccion':["", Validators.required]
         })
 		this.order = "";
         this.ascendent = false;
@@ -49,14 +49,14 @@ export class ModificarSeccionesComponent implements OnInit{
     modificar_seccion(){
         if(this.agregar_secciones_form.valid){
           this.submit_add = true;
-          var nacimiento_temp = new Date(this.agregar_secciones_form.controls['nacimiento'].value);
-          var date_string = nacimiento_temp.toISOString().slice(0, 10).replace('T', ' ');
+          var IDclase_temp = new Date(this.agregar_secciones_form.controls['IDclase'].value);
+          var date_string = IDclase_temp.toISOString().slice(0, 10).replace('T', ' ');
           var load = {
-            nombres:this.agregar_secciones_form.controls['nombres'].value, 
-            apellidos:this.agregar_secciones_form.controls['apellidos'].value, 
-            nacimiento: date_string,
-            departamento: this.agregar_secciones_form.controls['departamento'].value,
-            seccion_id:this.agregar_secciones_form.controls['seccion_id'].value
+            IDgrado:this.agregar_secciones_form.controls['IDgrado'].value, 
+            IDmaestro:this.agregar_secciones_form.controls['IDmaestro'].value, 
+            IDclase: date_string,
+            anio: this.agregar_secciones_form.controls['anio'].value,
+            IDseccion:this.agregar_secciones_form.controls['IDseccion'].value
           };
           var response;
           this.service.update_seccion(load).subscribe(
@@ -66,19 +66,19 @@ export class ModificarSeccionesComponent implements OnInit{
             ()=> {
                 if(response && response!=-1){//if not null, undefined,  or error
                     for(var i = 0; i<this.secciones.length;i++){
-                        if(this.secciones[i].seccion_id == this.agregar_secciones_form.controls['seccion_id'].value){
-                            this.secciones[i].nombres = this.agregar_secciones_form.controls['nombres'].value;
-                            this.secciones[i].apellidos = this.agregar_secciones_form.controls['apellidos'].value;
-                            this.secciones[i].nacimiento = this.agregar_secciones_form.controls['nacimiento'].value;
-                            this.secciones[i].departamento = this.agregar_secciones_form.controls['departamento'].value;
+                        if(this.secciones[i].IDseccion == this.agregar_secciones_form.controls['IDseccion'].value){
+                            this.secciones[i].IDgrado = this.agregar_secciones_form.controls['IDgrado'].value;
+                            this.secciones[i].IDmaestro = this.agregar_secciones_form.controls['IDmaestro'].value;
+                            this.secciones[i].IDclase = this.agregar_secciones_form.controls['IDclase'].value;
+                            this.secciones[i].anio = this.agregar_secciones_form.controls['anio'].value;
                         }
                     }
                     for(var i = 0; i<this.temp_secciones.length;i++){
-                        if(this.temp_secciones[i].seccion_id == this.agregar_secciones_form.controls['seccion_id'].value){
-                            this.temp_secciones[i].nombres = this.agregar_secciones_form.controls['nombres'].value;
-                            this.temp_secciones[i].apellidos = this.agregar_secciones_form.controls['apellidos'].value;
-                            this.temp_secciones[i].nacimiento = this.agregar_secciones_form.controls['nacimiento'].value;
-                            this.temp_secciones[i].departamento = this.agregar_secciones_form.controls['departamento'].value;
+                        if(this.temp_secciones[i].IDseccion == this.agregar_secciones_form.controls['IDseccion'].value){
+                            this.temp_secciones[i].IDgrado = this.agregar_secciones_form.controls['IDgrado'].value;
+                            this.temp_secciones[i].IDmaestro = this.agregar_secciones_form.controls['IDmaestro'].value;
+                            this.temp_secciones[i].IDclase = this.agregar_secciones_form.controls['IDclase'].value;
+                            this.temp_secciones[i].anio = this.agregar_secciones_form.controls['anio'].value;
                         }
                     }
                   this.modificar_success();
@@ -132,11 +132,11 @@ export class ModificarSeccionesComponent implements OnInit{
 
     set_seccion(id){
         this.submit_add = false;
-        this.agregar_secciones_form.controls['seccion_id'].setValue(this.secciones[id].seccion_id);
-    	this.agregar_secciones_form.controls['nombres'].setValue(this.secciones[id].nombres);
-    	this.agregar_secciones_form.controls['apellidos'].setValue(this.secciones[id].apellidos);
-    	this.agregar_secciones_form.controls['departamento'].setValue(this.secciones[id].departamento);
-    	this.agregar_secciones_form.controls['nacimiento'].setValue(this.secciones[id].nacimiento.substring(0,10));
+        this.agregar_secciones_form.controls['IDseccion'].setValue(this.secciones[id].IDseccion);
+    	this.agregar_secciones_form.controls['IDgrado'].setValue(this.secciones[id].IDgrado);
+    	this.agregar_secciones_form.controls['IDmaestro'].setValue(this.secciones[id].IDmaestro);
+    	this.agregar_secciones_form.controls['anio'].setValue(this.secciones[id].anio);
+    	this.agregar_secciones_form.controls['IDclase'].setValue(this.secciones[id].IDclase);
     	
     }
 
@@ -144,7 +144,7 @@ export class ModificarSeccionesComponent implements OnInit{
     	this.secciones = [];
     	if(this.search_string.trim().length > 0){
     		for(var i = 0; i<this.temp_secciones.length;i++){
-	    		if(this.temp_secciones[i].nombres.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_secciones[i].apellidos.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_secciones[i].seccion_id+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
+	    		if(this.temp_secciones[i].IDgrado.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_secciones[i].IDmaestro.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_secciones[i].IDseccion+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
 	    			this.secciones.push(this.temp_secciones[i]);
 	    		}
 	    	}
@@ -173,8 +173,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_nombre_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -183,8 +183,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_nombre_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -208,8 +208,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_id_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.seccion_id;
-            var y = b.seccion_id;
+            var x = a.IDseccion;
+            var y = b.IDseccion;
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -218,8 +218,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_id_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.seccion_id;
-            var y = b.seccion_id;
+            var x = a.IDseccion;
+            var y = b.IDseccion;
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -243,8 +243,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_apellido_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDmaestro.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDmaestro.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -253,8 +253,8 @@ export class ModificarSeccionesComponent implements OnInit{
 
     sort_apellido_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDmaestro.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDmaestro.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;

@@ -17,10 +17,10 @@ export class AgregarSeccionesComponent implements OnInit{
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService){
 		this.submit_add = false;
 		this.agregar_secciones_form = form_builder.group({
-            'nombres' : ["", Validators.required],
-            'apellidos' : ["", Validators.required],
-            'nacimiento' : ["", Validators.required],
-            'departamento' : ["", Validators.required],
+            'IDgrado' : ["", Validators.required],
+            'IDmaestro' : ["", Validators.required],
+            'IDclase' : ["", Validators.required],
+            'anio' : ["", Validators.required],
             'id' : [{value: "", disabled: true}, ]
         })
 	}
@@ -31,13 +31,11 @@ export class AgregarSeccionesComponent implements OnInit{
   agregar_seccion(){
     if(this.agregar_secciones_form.valid){
       this.submit_add = true;
-      var nacimiento_temp = new Date(this.agregar_secciones_form.controls['nacimiento'].value);
-      var date_string = nacimiento_temp.toISOString().slice(0, 10).replace('T', ' ');
       var load = {
-        nombres:this.agregar_secciones_form.controls['nombres'].value, 
-        apellidos:this.agregar_secciones_form.controls['apellidos'].value, 
-        nacimiento: date_string,
-        departamento: this.agregar_secciones_form.controls['departamento'].value
+        IDgrado:this.agregar_secciones_form.controls['IDgrado'].value, 
+        IDmaestro:this.agregar_secciones_form.controls['IDmaestro'].value, 
+        IDclase:this.agregar_secciones_form.controls['IDclase'].value,
+        anio:this.agregar_secciones_form.controls['anio'].value
       };
       var response;
       this.service.insert_seccion(load).subscribe(
@@ -58,10 +56,10 @@ export class AgregarSeccionesComponent implements OnInit{
   }
 
   clear_seccion(){
-    this.agregar_secciones_form.controls['nombres'].setValue("");
-    this.agregar_secciones_form.controls['apellidos'].setValue("");
-    this.agregar_secciones_form.controls['nacimiento'].setValue("");
-    this.agregar_secciones_form.controls['departamento'].setValue("");
+    this.agregar_secciones_form.controls['IDgrado'].setValue("");
+    this.agregar_secciones_form.controls['IDmaestro'].setValue("");
+    this.agregar_secciones_form.controls['IDclase'].setValue("");
+    this.agregar_secciones_form.controls['anio'].setValue("");
     this.submit_add = false;
   }
 
