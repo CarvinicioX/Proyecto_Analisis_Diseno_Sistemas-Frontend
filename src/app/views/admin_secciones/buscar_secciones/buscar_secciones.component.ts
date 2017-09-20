@@ -21,9 +21,9 @@ export class BuscarSeccionesComponent implements OnInit{
     private search_string:string;
     private seccion_nombre:string;
     private seccion_apellido:string;
-    private seccion_id:number;
-    private seccion_departamento:string;
-    private seccion_nacimiento:string;
+    private IDseccion:number;
+    private seccion_anio:string;
+    private seccion_IDclase:string;
 
 	constructor(private router:Router, private service:AdminSeccionesService){
 		this.order = "";
@@ -79,18 +79,18 @@ export class BuscarSeccionesComponent implements OnInit{
     }
 
     set_seccion(id){
-    	this.seccion_nombre = this.secciones[id].nombres;
-    	this.seccion_apellido = this.secciones[id].apellidos;
-    	this.seccion_departamento = this.secciones[id].departamento;
-    	this.seccion_nacimiento = this.secciones[id].nacimiento.substring(0,10);
-    	this.seccion_id = this.secciones[id].seccion_id;
+    	this.seccion_nombre = this.secciones[id].IDgrado;
+    	this.seccion_apellido = this.secciones[id].IDmaestro;
+    	this.seccion_anio = this.secciones[id].anio;
+    	this.seccion_IDclase = this.secciones[id].IDclase;
+    	this.IDseccion = this.secciones[id].IDseccion;
     }
 
     search_seccion(){
     	this.secciones = [];
     	if(this.search_string.trim().length > 0){
     		for(var i = 0; i<this.temp_secciones.length;i++){
-	    		if(this.temp_secciones[i].nombres.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_secciones[i].apellidos.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_secciones[i].seccion_id+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
+	    		if(this.temp_secciones[i].IDgrado.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_secciones[i].IDmaestros.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_secciones[i].IDseccion+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
 	    			this.secciones.push(this.temp_secciones[i]);
 	    		}
 	    	}
@@ -119,8 +119,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_nombre_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -129,8 +129,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_nombre_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDgrado.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -154,8 +154,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_id_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.seccion_id;
-            var y = b.seccion_id;
+            var x = a.IDseccion;
+            var y = b.IDseccion;
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -164,8 +164,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_id_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.seccion_id;
-            var y = b.seccion_id;
+            var x = a.IDseccion;
+            var y = b.IDseccion;
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -189,8 +189,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_apellido_asc(){
         this.secciones.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDmaestros.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDmaestros.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -199,8 +199,8 @@ export class BuscarSeccionesComponent implements OnInit{
 
     sort_apellido_desc(){
         this.secciones.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.IDmaestros.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.IDmaestros.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;

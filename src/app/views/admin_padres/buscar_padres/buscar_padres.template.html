@@ -24,40 +24,40 @@
                         <thead>
                             <tr>
                                 <th class="text-center col-md-1 widget-element" (click)="sort_id()"><b>ID <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order=='id', 'fa-arrow-down':!ascendent && order=='id', 'fa-sort':order!='id'}"></i></b></th>
-                                <th class="text-center col-md-5 widget-element" (click)="sort_nombre()"><b>Nombres <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order=='nombre', 'fa-arrow-down':!ascendent && order=='nombre', 'fa-sort':order!='nombre'}"></i></b></th>
-                                <th class="text-center col-md-5 widget-element" (click)="sort_apellido()"><b>Apellidos <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order=='apellido', 'fa-arrow-down':!ascendent && order=='apellido', 'fa-sort':order!='apellido'}"></i></b></th>
+                                <th class="text-center col-md-5 widget-element" (click)="sort_nombre()"><b>Nombre <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order=='nombre', 'fa-arrow-down':!ascendent && order=='nombre', 'fa-sort':order!='nombre'}"></i></b></th>
+                                <th class="text-center col-md-5 widget-element" (click)="sort_telefono()"><b>Telefono <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order=='telefono', 'fa-arrow-down':!ascendent && order=='telefono', 'fa-sort':order!='telefono'}"></i></b></th>
                                 <th class="text-center col-md-1"><b>Ver</b></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngIf="padres.length > 0 && padres.length >= requestOffsetLeft  + 0">
-                                <td>{{padres[requestOffsetLeft -1 + 0].padre_id}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 0].nombres}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 0].apellidos}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 0].IDpadre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 0].nombre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 0].telefono}}</td>
                                 <td class="text-center widget-element text-success" (click)="set_padre(requestOffsetLeft -1 + 0)"><b>Ver</b></td>
                             </tr>
                             <tr *ngIf="padres.length > 0 && padres.length >= requestOffsetLeft  + 1">
-                                <td>{{padres[requestOffsetLeft -1 + 1].padre_id}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 1].nombres}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 1].apellidos}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 1].IDpadre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 1].nombre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 1].telefono}}</td>
                                 <td class="text-center widget-element text-success" (click)="set_padre(requestOffsetLeft -1 + 1)"><b>Ver</b></td>
                             </tr>
                             <tr *ngIf="padres.length > 0 && padres.length >= requestOffsetLeft  + 2">
-                                <td>{{padres[requestOffsetLeft -1 + 2].padre_id}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 2].nombres}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 2].apellidos}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 2].IDpadre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 2].nombre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 2].telefono}}</td>
                                 <td class="text-center widget-element text-success" (click)="set_padre(requestOffsetLeft -1 + 2)"><b>Ver</b></td>
                             </tr>
                             <tr *ngIf="padres.length > 0 && padres.length >= requestOffsetLeft  + 3">
-                                <td>{{padres[requestOffsetLeft -1 + 3].padre_id}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 3].nombres}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 3].apellidos}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 3].IDpadre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 3].nombre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 3].telefono}}</td>
                                 <td class="text-center widget-element text-success" (click)="set_padre(requestOffsetLeft -1 + 3)"><b>Ver</b></td>
                             </tr>
                             <tr *ngIf="padres.length > 0 && padres.length >= requestOffsetLeft  + 4">
-                                <td>{{padres[requestOffsetLeft -1 + 4].padre_id}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 4].nombres}}</td>
-                                <td>{{padres[requestOffsetLeft -1 + 4].apellidos}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 4].IDpadre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 4].nombre}}</td>
+                                <td>{{padres[requestOffsetLeft -1 + 4].telefono}}</td>
                                 <td class="text-center widget-element text-success" (click)="set_padre(requestOffsetLeft -1 + 4)"><b>Ver</b></td>
                             </tr>
                         </tbody>
@@ -77,18 +77,18 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-12">
                             <div class="form-group form-group-margins">
-                                <label>Nombres</label>
+                                <label>Nombre</label>
                                 <div class = "input-group">
-                                    <input name="alum_nombre" type="text" class="form-control" [(ngModel)]="padre_nombre" #alum_nombre="ngModel" readonly>
+                                    <input name="padre_nombre" type="text" class="form-control" [(ngModel)]="padre_nombre" #padr_nombre="ngModel" readonly>
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-12">
                             <div class="form-group form-group-margins">
-                                <label>Apellidos</label>
+                                <label>Telefono</label>
                                 <div class = "input-group">
-                                    <input name="alum_apellido" type="text" class="form-control" [(ngModel)]="padre_apellido" #alum_apellido="ngModel" readonly>
+                                    <input name="padr_telefono" type="text" class="form-control" [(ngModel)]="padre_telefono" #padr_telefono="ngModel" readonly>
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 </div>
                             </div>
@@ -97,9 +97,9 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-12">
                             <div class="form-group form-group-margins">
-                                <label>Departamento</label>
+                                <label>Direccion</label>
                                 <div class = "input-group" >
-                                    <input name="alum_dpto" type="text" class="form-control" [(ngModel)]="padre_departamento" #alum_dpto="ngModel" readonly>
+                                    <input name="padr_direccion" type="text" class="form-control" [(ngModel)]="padre_direccion" #padr_direccion="ngModel" readonly>
                                     <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
                                 
@@ -109,16 +109,16 @@
                             <div class="form-group form-group-margins">
                                 <label>ID Padre</label>
                                 <div class = "input-group">
-                                    <input name="alum_id" type="text" class="form-control" [(ngModel)]="padre_id" #alum_id="ngModel" readonly>
+                                    <input name="padr_id" type="text" class="form-control" [(ngModel)]="IDpadre" #padr_id="ngModel" readonly>
                                     <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-6">
                             <div class="form-group form-group-margins">
-                                <label>Nacimiento</label>
+                                <label>Correo</label>
                                 <div class = "input-group">
-                                    <input name="alum_nacimiento" type="text" class="form-control" [(ngModel)]="padre_nacimiento" #alum_nacimiento="ngModel" readonly>
+                                    <input name="padr_correo" type="text" class="form-control" [(ngModel)]="padre_correo" #padr_correo="ngModel" readonly>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>

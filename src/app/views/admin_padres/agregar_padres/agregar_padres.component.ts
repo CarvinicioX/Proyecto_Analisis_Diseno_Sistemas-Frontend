@@ -17,10 +17,10 @@ export class AgregarPadresComponent implements OnInit{
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminPadresService){
 		this.submit_add = false;
 		this.agregar_padres_form = form_builder.group({
-            'nombres' : ["", Validators.required],
-            'apellidos' : ["", Validators.required],
-            'nacimiento' : ["", Validators.required],
-            'departamento' : ["", Validators.required],
+            'nombre' : ["", Validators.required],
+            'telefono' : ["", Validators.required],
+            'direccion' : ["", Validators.required],
+            'correo' : ["", Validators.required],
             'id' : [{value: "", disabled: true}, ]
         })
 	}
@@ -31,13 +31,11 @@ export class AgregarPadresComponent implements OnInit{
   agregar_padre(){
     if(this.agregar_padres_form.valid){
       this.submit_add = true;
-      var nacimiento_temp = new Date(this.agregar_padres_form.controls['nacimiento'].value);
-      var date_string = nacimiento_temp.toISOString().slice(0, 10).replace('T', ' ');
       var load = {
-        nombres:this.agregar_padres_form.controls['nombres'].value, 
-        apellidos:this.agregar_padres_form.controls['apellidos'].value, 
-        nacimiento: date_string,
-        departamento: this.agregar_padres_form.controls['departamento'].value
+        nombre:this.agregar_padres_form.controls['nombre'].value, 
+        telefono:this.agregar_padres_form.controls['telefono'].value, 
+	      direccion:this.agregar_padres_form.controls['direccion'].value,
+        correo:this.agregar_padres_form.controls['correo'].value
       };
       var response;
       this.service.insert_padre(load).subscribe(
@@ -58,10 +56,10 @@ export class AgregarPadresComponent implements OnInit{
   }
 
   clear_padre(){
-    this.agregar_padres_form.controls['nombres'].setValue("");
-    this.agregar_padres_form.controls['apellidos'].setValue("");
-    this.agregar_padres_form.controls['nacimiento'].setValue("");
-    this.agregar_padres_form.controls['departamento'].setValue("");
+    this.agregar_padres_form.controls['nombre'].setValue("");
+    this.agregar_padres_form.controls['telefono'].setValue("");
+    this.agregar_padres_form.controls['direccion'].setValue("");
+    this.agregar_padres_form.controls['correo'].setValue("");
     this.submit_add = false;
   }
 

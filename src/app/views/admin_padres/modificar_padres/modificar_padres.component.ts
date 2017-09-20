@@ -26,11 +26,11 @@ export class ModificarPadresComponent implements OnInit{
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminPadresService){
         this.submit_add = false;
             this.agregar_padres_form = form_builder.group({
-            'nombres' : ["", Validators.required],
-            'apellidos' : ["", Validators.required],
-            'nacimiento' : ["", Validators.required],
-            'departamento' : ["", Validators.required],
-            'padre_id':["", Validators.required]
+            'nombre' : ["", Validators.required],
+            'telefono' : ["", Validators.required],
+            'correo' : ["", Validators.required],
+            'direccion' : ["", Validators.required],
+            'IDpadre':["", Validators.required]
         })
 		this.order = "";
         this.ascendent = false;
@@ -49,14 +49,12 @@ export class ModificarPadresComponent implements OnInit{
     modificar_padre(){
         if(this.agregar_padres_form.valid){
           this.submit_add = true;
-          var nacimiento_temp = new Date(this.agregar_padres_form.controls['nacimiento'].value);
-          var date_string = nacimiento_temp.toISOString().slice(0, 10).replace('T', ' ');
           var load = {
-            nombres:this.agregar_padres_form.controls['nombres'].value, 
-            apellidos:this.agregar_padres_form.controls['apellidos'].value, 
-            nacimiento: date_string,
-            departamento: this.agregar_padres_form.controls['departamento'].value,
-            padre_id:this.agregar_padres_form.controls['padre_id'].value
+            nombre:this.agregar_padres_form.controls['nombre'].value, 
+            telefono:this.agregar_padres_form.controls['telefono'].value, 
+            correo: this.agregar_padres_form.controls['correo'].value,
+            direccion: this.agregar_padres_form.controls['direccion'].value,
+            IDpadre:this.agregar_padres_form.controls['IDpadre'].value
           };
           var response;
           this.service.update_padre(load).subscribe(
@@ -66,19 +64,19 @@ export class ModificarPadresComponent implements OnInit{
             ()=> {
                 if(response && response!=-1){//if not null, undefined,  or error
                     for(var i = 0; i<this.padres.length;i++){
-                        if(this.padres[i].padre_id == this.agregar_padres_form.controls['padre_id'].value){
-                            this.padres[i].nombres = this.agregar_padres_form.controls['nombres'].value;
-                            this.padres[i].apellidos = this.agregar_padres_form.controls['apellidos'].value;
-                            this.padres[i].nacimiento = this.agregar_padres_form.controls['nacimiento'].value;
-                            this.padres[i].departamento = this.agregar_padres_form.controls['departamento'].value;
+                        if(this.padres[i].IDpadre == this.agregar_padres_form.controls['IDpadre'].value){
+                            this.padres[i].nombre = this.agregar_padres_form.controls['nombre'].value;
+                            this.padres[i].telefono = this.agregar_padres_form.controls['telefono'].value;
+                            this.padres[i].correo = this.agregar_padres_form.controls['correo'].value;
+                            this.padres[i].direccion = this.agregar_padres_form.controls['direccion'].value;
                         }
                     }
                     for(var i = 0; i<this.temp_padres.length;i++){
-                        if(this.temp_padres[i].padre_id == this.agregar_padres_form.controls['padre_id'].value){
-                            this.temp_padres[i].nombres = this.agregar_padres_form.controls['nombres'].value;
-                            this.temp_padres[i].apellidos = this.agregar_padres_form.controls['apellidos'].value;
-                            this.temp_padres[i].nacimiento = this.agregar_padres_form.controls['nacimiento'].value;
-                            this.temp_padres[i].departamento = this.agregar_padres_form.controls['departamento'].value;
+                        if(this.temp_padres[i].IDpadre == this.agregar_padres_form.controls['IDpadre'].value){
+                            this.temp_padres[i].nombre = this.agregar_padres_form.controls['nombre'].value;
+                            this.temp_padres[i].telefono = this.agregar_padres_form.controls['telefono'].value;
+                            this.temp_padres[i].correo = this.agregar_padres_form.controls['correo'].value;
+                            this.temp_padres[i].direccion = this.agregar_padres_form.controls['direccion'].value;
                         }
                     }
                   this.modificar_success();
@@ -132,11 +130,11 @@ export class ModificarPadresComponent implements OnInit{
 
     set_padre(id){
         this.submit_add = false;
-        this.agregar_padres_form.controls['padre_id'].setValue(this.padres[id].padre_id);
-    	this.agregar_padres_form.controls['nombres'].setValue(this.padres[id].nombres);
-    	this.agregar_padres_form.controls['apellidos'].setValue(this.padres[id].apellidos);
-    	this.agregar_padres_form.controls['departamento'].setValue(this.padres[id].departamento);
-    	this.agregar_padres_form.controls['nacimiento'].setValue(this.padres[id].nacimiento.substring(0,10));
+        this.agregar_padres_form.controls['IDpadre'].setValue(this.padres[id].IDpadre);
+    	this.agregar_padres_form.controls['nombre'].setValue(this.padres[id].nombre);
+    	this.agregar_padres_form.controls['telefono'].setValue(this.padres[id].telefono);
+    	this.agregar_padres_form.controls['direccion'].setValue(this.padres[id].direccion);
+    	this.agregar_padres_form.controls['correo'].setValue(this.padres[id].correo);
     	
     }
 
@@ -144,7 +142,7 @@ export class ModificarPadresComponent implements OnInit{
     	this.padres = [];
     	if(this.search_string.trim().length > 0){
     		for(var i = 0; i<this.temp_padres.length;i++){
-	    		if(this.temp_padres[i].nombres.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_padres[i].apellidos.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_padres[i].padre_id+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
+	    		if(this.temp_padres[i].nombre.toLowerCase().includes(this.search_string.toLowerCase().trim()) || this.temp_padres[i].telefono.toLowerCase().includes(this.search_string.toLowerCase().trim()) || (this.temp_padres[i].IDpadre+"").toLowerCase().includes(this.search_string.toLowerCase().trim())){
 	    			this.padres.push(this.temp_padres[i]);
 	    		}
 	    	}
@@ -173,8 +171,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_nombre_asc(){
         this.padres.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.nombre.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.nombre.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -183,8 +181,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_nombre_desc(){
         this.padres.sort(function(a, b){
-            var x = a.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.nombres.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.nombre.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.nombre.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -208,8 +206,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_id_asc(){
         this.padres.sort(function(a, b){
-            var x = a.padre_id;
-            var y = b.padre_id;
+            var x = a.IDpadre;
+            var y = b.IDpadre;
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -218,8 +216,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_id_desc(){
         this.padres.sort(function(a, b){
-            var x = a.padre_id;
-            var y = b.padre_id;
+            var x = a.IDpadre;
+            var y = b.IDpadre;
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
@@ -243,8 +241,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_apellido_asc(){
         this.padres.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.telefono.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.telefono.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return 1;}
             if (x > y) {return -1;}
             return 0;
@@ -253,8 +251,8 @@ export class ModificarPadresComponent implements OnInit{
 
     sort_apellido_desc(){
         this.padres.sort(function(a, b){
-            var x = a.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
-            var y = b.apellidos.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var x = a.telefono.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
+            var y = b.telefono.toLowerCase().replace("\"","").replace(".","").replace("  "," ").trim();
             if (x < y) {return -1;}
             if (x > y) {return 1;}
             return 0;
