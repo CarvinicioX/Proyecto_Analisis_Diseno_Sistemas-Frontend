@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ng build",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -13,6 +14,7 @@
     "@angular/compiler": "4.0.1",
     "@angular/compiler-cli": "4.0.1",
     "@angular/core": "4.0.1",
+    "@angular/cli": "1.0.0",
     "@angular/forms": "4.0.1",
     "@angular/http": "4.0.1",
     "@angular/platform-browser": "4.0.1",
@@ -47,5 +49,9 @@
     "codelyzer": "~2.0.0",
     "ts-node": "~2.0.0",
     "typescript": "~2.1.5"
+  },
+  "engines": {
+    "node": "6.11.2",
+    "npm": "3.10.10"
   }
 }
