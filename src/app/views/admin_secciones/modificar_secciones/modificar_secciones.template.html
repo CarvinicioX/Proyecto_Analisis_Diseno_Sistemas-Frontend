@@ -79,8 +79,10 @@
                             <div class="form-group form-group-margins">
                                 <label>IDgrado</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_secciones_form.controls['IDgrado'].valid && submit_add, 'has-success':agregar_secciones_form.controls['IDgrado'].valid && submit_add}">
-                                    <input [formControl]="agregar_secciones_form.controls['IDgrado']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <select  [formControl]="agregar_secciones_form.controls['IDgrado']"  class="form-control" >
+                                        <option *ngFor="let grado of grados" >{{grado.IDgrado}}</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -88,8 +90,10 @@
                             <div class="form-group form-group-margins">
                                 <label>IDmaestro</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_secciones_form.controls['IDmaestro'].valid && submit_add, 'has-success':agregar_secciones_form.controls['IDmaestro'].valid && submit_add}">
-                                    <input [formControl]="agregar_secciones_form.controls['IDmaestro']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <select [formControl]="agregar_secciones_form.controls['IDmaestro']"  class="form-control" >
+                                        <option *ngFor="let maestro of maestros" >{{maestro.IDmaestro}}</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -97,10 +101,10 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-12">
                             <div class="form-group form-group-margins">
-                                <label>IDalumno</label>
+                                <label>Año</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_secciones_form.controls['anio'].valid && submit_add, 'has-success':agregar_secciones_form.controls['anio'].valid && submit_add}">
-                                    <input [formControl]="agregar_secciones_form.controls['anio']" type="text" class="form-control">
-                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                    <input [formControl]="agregar_secciones_form.controls['anio']" type="text" minlength="4"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'  class="form-control"  maxlength="4">
+                                    <span class="input-group-addon"><i class="fa fa-map-location"></i></span>
                                 </div>
                                 
                             </div>
@@ -118,8 +122,11 @@
                             <div class="form-group form-group-margins">
                                 <label>IDclase</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_secciones_form.controls['IDclase'].valid && submit_add, 'has-success':agregar_secciones_form.controls['IDclase'].valid && submit_add}">
-                                    <input [formControl]="agregar_secciones_form.controls['IDclase']" type="text" class="form-control">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                     
+                                    <select [formControl]="agregar_secciones_form.controls['IDclase']"  class="form-control">
+                                        <option *ngFor="let clase of clases" >{{clase.IDclase}}</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-location"></i></span>
                                 </div>
                             </div>
                         </div>

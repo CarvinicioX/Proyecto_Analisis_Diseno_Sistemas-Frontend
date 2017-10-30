@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { default as swal } from 'sweetalert2';
 import { AdminSeccionesService } from '../admin_secciones.service';
+import { AdminMaestrosService } from './../../admin_maestros/admin_maestros.service';
+import { AdminGradosService } from './../../admin_grados/admin_grados.service';
+import { AdminClasesService } from './../../admin_clases/admin_clases.service';
 
 @Component({
   selector: 'modificar_secciones',
@@ -22,8 +25,11 @@ export class ModificarSeccionesComponent implements OnInit{
     private search_string:string;
     private agregar_secciones_form:FormGroup;
     private submit_add:boolean;
+    private grados:any;
+    private maestros:any;
+    private clases:any;
 
-	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService){
+	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService, private servicem:AdminMaestrosService, private serviceg:AdminGradosService, private servicec:AdminClasesService){
         this.submit_add = false;
             this.agregar_secciones_form = form_builder.group({
             'IDgrado' : ["", Validators.required],
@@ -34,6 +40,9 @@ export class ModificarSeccionesComponent implements OnInit{
         })
 		this.order = "";
         this.ascendent = false;
+        this.grados = [];
+        this.maestros = [];
+        this.clases = [];
         this.requestOffsetRight = 0;//set as 0
         this.requestOffsetLeft = 0;//set as 0
         this.offsetView = 5;
@@ -43,18 +52,24 @@ export class ModificarSeccionesComponent implements OnInit{
 	}
 
 	ngOnInit() {
-		this.get_secciones();
+    
+        this.get_secciones();
+        this.get_grados();
+        this.get_maestros();
+        this.get_clases();
     }
 
+
     modificar_seccion(){
+        console.log("rrrrrrrrrrrrr");
         if(this.agregar_secciones_form.valid){
           this.submit_add = true;
-          var IDclase_temp = new Date(this.agregar_secciones_form.controls['IDclase'].value);
-          var date_string = IDclase_temp.toISOString().slice(0, 10).replace('T', ' ');
+        //  var IDclase_temp = new Date(this.agregar_secciones_form.controls['IDclase'].value);
+          //var date_string = IDclase_temp.toISOString().slice(0, 10).replace('T', ' ');
           var load = {
             IDgrado:this.agregar_secciones_form.controls['IDgrado'].value, 
             IDmaestro:this.agregar_secciones_form.controls['IDmaestro'].value, 
-            IDclase: date_string,
+            IDclase:this.agregar_secciones_form.controls['IDclase'].value,
             anio: this.agregar_secciones_form.controls['anio'].value,
             IDseccion:this.agregar_secciones_form.controls['IDseccion'].value
           };
@@ -92,7 +107,59 @@ export class ModificarSeccionesComponent implements OnInit{
           this.submit_add = true;
         }
     }
-
+    get_maestros(){
+        var response;
+        this.servicem.get_maestros().subscribe(
+            //store response
+            data => response = data,
+            err => console.log(err),
+            ()=> {
+                if(response && response != -1){//if not null
+                    this.maestros = response;
+                }else{
+                    this.maestros = [];
+                }
+               
+            }
+        );
+    }
+    get_grados(){
+      var response;
+      this.serviceg.get_grados().subscribe(
+          //store response
+          data => response = data,
+          err => console.log(err),
+          ()=> {
+              if(response && response != -1){//if not null
+                  this.grados = response;
+                  console.log(this.grados);
+                  console.log("peeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")          
+              }else{
+                  this.grados = [];
+                 
+              }
+             
+          }
+      );
+    }
+    get_clases(){
+      var response;
+      this.servicec.get_clases().subscribe(
+          //store response
+          data => response = data,
+          err => console.log(err),
+          ()=> {
+              if(response && response != -1){//if not null
+                  this.clases = response;
+           
+              }else{
+                  this.clases = [];
+                
+              }
+             
+          }
+      );
+    }
     get_secciones(){
         var response;
         this.service.get_secciones().subscribe(
