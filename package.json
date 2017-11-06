@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "postinstall": "ng build"
+    "postinstall": "ng build --prod --aot=false"
   },
+  "private": true,
   "dependencies": {
     "@angular/animations": "4.0.1",
     "@angular/common": "4.0.1",

@@ -17,7 +17,7 @@ export class AdminPadresService {
   constructor(private http: Http) {}
 
   //Port where the backend server is  running
-  private baseUrl: string = "http://localhost:8000";
+  private baseUrl: string = "https://analisisbackend.herokuapp.com";
 
   insert_padre(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
