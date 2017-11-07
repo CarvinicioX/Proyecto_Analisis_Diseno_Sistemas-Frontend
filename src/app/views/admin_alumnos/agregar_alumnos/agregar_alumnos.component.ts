@@ -12,8 +12,8 @@ import { AdminAlumnosService } from '../admin_alumnos.service';
 
 export class AgregarAlumnosComponent implements OnInit{
 
-	private agregar_alumnos_form:FormGroup;
-	private submit_add:boolean;
+	public agregar_alumnos_form:FormGroup;
+	public submit_add:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminAlumnosService){
 		this.submit_add = false;
 		this.agregar_alumnos_form = form_builder.group({

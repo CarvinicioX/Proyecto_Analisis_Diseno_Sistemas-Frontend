@@ -20,11 +20,11 @@ export class RegisterComponent implements OnInit{
 	//Component varibles
 
 	//register_form FormGroup to be used as a Model Driven Form
-	private register_form:FormGroup;
+	public register_form:FormGroup;
 	//submitRegister keeps track if the register_form has been submitted
-	private submitRegister:Boolean;
+	public submitRegister:Boolean;
 	//loader is a boolean that whenever it's set to TRUE, the spinner animation on the Sign up button will be activated
-	private loader:Boolean;
+	public loader:Boolean;
 
 	//LoginComponent Constructor, FormBuilder reference, Router reference, RegisterService reference
 	constructor(form_builder: FormBuilder, private router:Router, private service : RegisterService){
