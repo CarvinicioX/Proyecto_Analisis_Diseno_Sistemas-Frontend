@@ -12,8 +12,8 @@ import { AdminMaestrosService } from '../admin_maestros.service';
 
 export class AgregarMaestrosComponent implements OnInit{
 
-	private agregar_maestros_form:FormGroup;
-	private submit_add:boolean;
+	public agregar_maestros_form:FormGroup;
+	public submit_add:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminMaestrosService){
 		this.submit_add = false;
 		this.agregar_maestros_form = form_builder.group({

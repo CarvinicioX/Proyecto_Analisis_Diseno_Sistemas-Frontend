@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit{
   //Component varibles
 
   //login_form FormGroup to be used as a Model Driven Form
-  private login_form:FormGroup;
+  public login_form:FormGroup;
   //submitLogin keeps track on weather the form has been submitted or not (in order to display errors, if any)
-  private submitLogin:Boolean;
+  public submitLogin:Boolean;
   //loader is a boolean that whenever it's set to TRUE, the spinner animation on the Sign in button will be activated
-  private loader:Boolean;
+  public loader:Boolean;
 
   //LoginComponent Constructor, FormBuilder reference, LoginService reference, and Router reference
   constructor(form_builder: FormBuilder, private service : LoginService, private router:Router){

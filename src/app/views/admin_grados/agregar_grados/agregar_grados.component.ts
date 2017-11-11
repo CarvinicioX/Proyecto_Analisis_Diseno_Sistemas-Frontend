@@ -12,8 +12,8 @@ import { AdminGradosService } from '../admin_grados.service';
 
 export class AgregarGradosComponent implements OnInit{
 
-	private agregar_grados_form:FormGroup;
-	private submit_add:boolean;
+	public agregar_grados_form:FormGroup;
+	public submit_add:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminGradosService){
 		this.submit_add = false;
 		this.agregar_grados_form = form_builder.group({

@@ -8,12 +8,13 @@ import { AdminGradosService } from './../../admin_grados/admin_grados.service';
 import { AdminClasesService } from './../../admin_clases/admin_clases.service';
 
 @Component({
-  selector: 'agregar_secciones',
-  templateUrl: 'agregar_secciones.template.html'
+	selector: 'agregar_secciones',
+	templateUrl: 'agregar_secciones.template.html'
 })
 
 
 export class AgregarSeccionesComponent implements OnInit{
+
 
   private agregar_secciones_form:FormGroup;
   private submit_add:boolean;
@@ -43,32 +44,7 @@ export class AgregarSeccionesComponent implements OnInit{
   }
   
 
-  agregar_seccion(){
-    if(this.agregar_secciones_form.valid){
-      this.submit_add = true;
-      var load = {
-        IDgrado:this.agregar_secciones_form.controls['IDgrado'].value, 
-        IDmaestro:this.agregar_secciones_form.controls['IDmaestro'].value, 
-        IDclase:this.agregar_secciones_form.controls['IDclase'].value,
-        anio:this.agregar_secciones_form.controls['anio'].value
-      };
-      var response;
-      this.service.insert_seccion(load).subscribe(
-        //store response
-        data => response = data,
-        err => console.log(err),
-        ()=> {
-            if(response && response!=-1){//if not null, undefined,  or error
-              this.agregar_success();
-            }else{
-              this.internalServerError();
-            }
-        }
-      );
-    }else{
-      this.submit_add = true;
-    }
-  }
+ 
   get_maestros(){
     var response;
     this.servicem.get_maestros().subscribe(
@@ -135,32 +111,63 @@ set_grados(){
 
 }
 
-  clear_seccion(){
-    this.agregar_secciones_form.controls['IDgrado'].setValue("");
-    this.agregar_secciones_form.controls['IDmaestro'].setValue("");
-    this.agregar_secciones_form.controls['IDclase'].setValue("");
-    this.agregar_secciones_form.controls['anio'].setValue("");
-    this.submit_add = false;
-  }
 
-  agregar_success() {
-      swal({
-          title: "Agregado Exitosamente",
-          text: "Seccion agregado de forma exitosa.",
-          confirmButtonText: '<i class="fa fa-thumbs-up"></i> Regresar',
-          allowOutsideClick: false,
-          type: "success"
-      }).then(()=>{this.clear_seccion();})
-  }
 
-  internalServerError() {
-    swal({
-          title: "Error Interno del Servidor",
-          text: "Error interno del servidor, por favor vuelva a intentarlo o contacte a su administrador.",
-          type: "warning",
-          allowOutsideClick: false
-      }).catch(swal.noop)
-  }
+	
+	agregar_seccion(){
+		if(this.agregar_secciones_form.valid){
+			this.submit_add = true;
+			var load = {
+				IDgrado:this.agregar_secciones_form.controls['IDgrado'].value, 
+				IDmaestro:this.agregar_secciones_form.controls['IDmaestro'].value, 
+				IDclase:this.agregar_secciones_form.controls['IDclase'].value,
+				anio:this.agregar_secciones_form.controls['anio'].value
+			};
+			var response;
+			this.service.insert_seccion(load).subscribe(
+				//store response
+				data => response = data,
+				err => console.log(err),
+				()=> {
+						if(response && response!=-1){//if not null, undefined,  or error
+							this.agregar_success();
+						}else{
+							this.internalServerError();
+						}
+				}
+			);
+		}else{
+			this.submit_add = true;
+		}
+	}
+
+
+	clear_seccion(){
+		this.agregar_secciones_form.controls['IDgrado'].setValue("");
+		this.agregar_secciones_form.controls['IDmaestro'].setValue("");
+		this.agregar_secciones_form.controls['IDclase'].setValue("");
+		this.agregar_secciones_form.controls['anio'].setValue("");
+		this.submit_add = false;
+	}
+
+	agregar_success() {
+			swal({
+					title: "Agregado Exitosamente",
+					text: "Seccion agregado de forma exitosa.",
+					confirmButtonText: '<i class="fa fa-thumbs-up"></i> Regresar',
+					allowOutsideClick: false,
+					type: "success"
+			}).then(()=>{this.clear_seccion();})
+	}
+
+	internalServerError() {
+		swal({
+					title: "Error Interno del Servidor",
+					text: "Error interno del servidor, por favor vuelva a intentarlo o contacte a su administrador.",
+					type: "warning",
+					allowOutsideClick: false
+			}).catch(swal.noop)
+	}
 }
 
 

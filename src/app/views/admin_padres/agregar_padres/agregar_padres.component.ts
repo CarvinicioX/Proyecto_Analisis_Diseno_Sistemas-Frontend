@@ -12,8 +12,8 @@ import { AdminPadresService } from '../admin_padres.service';
 
 export class AgregarPadresComponent implements OnInit{
 
-	private agregar_padres_form:FormGroup;
-	private submit_add:boolean;
+	public agregar_padres_form:FormGroup;
+	public submit_add:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminPadresService){
 		this.submit_add = false;
 		this.agregar_padres_form = form_builder.group({

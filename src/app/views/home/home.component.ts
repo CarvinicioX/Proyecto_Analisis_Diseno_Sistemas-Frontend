@@ -17,9 +17,9 @@ import { HomeService } from './home.service';
 
 export class HomeComponent implements OnInit{
 	//Component Variables
-	private notificationsOffsetLeft:number;//offset to keep track of left end of notifications browsing
-	private notificationsOffsetRight:number;//offset to keep track of right end of notifications browsing
-	private notifications:any;
+	public notificationsOffsetLeft:number;//offset to keep track of left end of notifications browsing
+	public notificationsOffsetRight:number;//offset to keep track of right end of notifications browsing
+	public notifications:any;
 
 	constructor(private router:Router, private service : HomeService){
 	    this.notificationsOffsetLeft = 0;//set as 0

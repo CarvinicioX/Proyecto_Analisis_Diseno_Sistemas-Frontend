@@ -12,8 +12,8 @@ import { AdminClasesService } from '../admin_clases.service';
 
 export class AgregarClasesComponent implements OnInit{
 
-	private agregar_clases_form:FormGroup;
-	private submit_add:boolean;
+	public agregar_clases_form:FormGroup;
+	public submit_add:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminClasesService){
 		this.submit_add = false;
 		this.agregar_clases_form = form_builder.group({
