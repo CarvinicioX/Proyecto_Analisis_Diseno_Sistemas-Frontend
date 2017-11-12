@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { default as swal } from 'sweetalert2';
 import { AdminAlumnosService } from '../admin_alumnos.service';
+import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 @Component({
   selector: 'agregar_alumnos',
@@ -20,8 +22,8 @@ export class AgregarAlumnosComponent implements OnInit{
             'nombres' : ["", Validators.required],
             'apellidos' : ["", Validators.required],
             'nacimiento' : ["", Validators.required],
-            'departamento' : ["", Validators.required],
-            'id' : [{value: "", disabled: true}, ]
+            'nacimiento_temporal' :[""],
+            'departamento' : ["", Validators.required]
         })
 	}
 

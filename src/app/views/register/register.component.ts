@@ -25,17 +25,18 @@ export class RegisterComponent implements OnInit{
 	public submitRegister:Boolean;
 	//loader is a boolean that whenever it's set to TRUE, the spinner animation on the Sign up button will be activated
 	public loader:Boolean;
-
+    public hash_mask:any;
 	//LoginComponent Constructor, FormBuilder reference, Router reference, RegisterService reference
 	constructor(form_builder: FormBuilder, private router:Router, private service : RegisterService){
 		this.submitRegister = false;
 		this.loader = false;
+        this.hash_mask = [/./,/./,/./,/./,/./,/./,/./,/./,'-', /./,/./,/./,/./];
 		//We set the validators and initial values of the fields contained within the register_form
 	    this.register_form = form_builder.group({
-	    	'email' : [null, Validators.compose([Validators.required, Validators.maxLength(100), Validators.email])],
-	    	'username' : [null, Validators.compose([Validators.required, Validators.maxLength(25)])],
-	    	'password' : [null, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(8)])],
-	    	'confirm_password' : [null, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(8)])]
+	    	'email' : ["", Validators.compose([Validators.required, Validators.maxLength(100), Validators.email])],
+	    	'password' : ["", Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(8)])],
+	    	'confirm_password' : ["", Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(8)])],
+        'hash' : ["", Validators.compose([Validators.required])]
 	    },{validator: this.matchingPasswords('password', 'confirm_password')})//We add our custom validator
 	}
 
@@ -55,17 +56,45 @@ export class RegisterComponent implements OnInit{
 
 	
 	ngOnInit() {
+
     }
 
 
     register(){
     	//if register_form is valid
     	if(this.register_form.valid){
-			this.registerSuccess();
-
+			this.loader = true;
+            var load = {
+                username:this.register_form.controls['email'].value, 
+                password:this.register_form.controls['password'].value, 
+                hash: this.register_form.controls['hash'].value
+            };
+            var response;
+                this.service.register(load).subscribe(
+            //store response
+            data => response = data[0],
+            err => {console.log(err); this.internalServerError();this.loader = false;},
+            ()=> {
+                if(response && response!=-1){
+                  if(response.success_status == -3){
+                      this.usernameAlreadyExists();
+                  }else if(response.success_status == -2){
+                      this.wrongHash();
+                  }else if(response.success_status == -1){
+                      this.hashAlreadyUsed();
+                  }else if(response.success_status == 0){
+                      this.registerSuccess();
+                  }
+                  this.loader = false;
+                }else{
+                  this.internalServerError();
+                  this.loader = false;
+                }
+            }
+      );
     	}else{
-    		//set submitRegister to true if register_form is not valid
     		this.submitRegister = true;
+            this.loader = false;
     	}
     	
   	}
@@ -89,8 +118,8 @@ export class RegisterComponent implements OnInit{
     //internalServerError(): Alerts the user if there is any error when trying to communicate with the backend server
     internalServerError() {
     	swal({
-            title: "Internal Server Error",
-            text: "Internal Server Error. Be sure you started the backend server before running the frontend. If it still doesn't work, contact Makoto.",
+            title: "Error Interno del Servidor",
+            text: "Error interno del servidor, favor revisar su conexión de internet o inténtelo más tarde",
             type: "warning",
             allowOutsideClick: false
         }).catch(swal.noop)
@@ -99,20 +128,30 @@ export class RegisterComponent implements OnInit{
     //usernameAlreadyExists(): Alerts the user if the username they provided already exists
     usernameAlreadyExists() {
     	swal({
-            title: "Username Already Exists",
-            text: "The provided username is already in use, please try a different one.",
+            title: "Correo Existe",
+            text: "El correo proporcionado ya pertenece a un usuario dentro del sistema",
             type: "error",
             allowOutsideClick: false
         }).catch(swal.noop)
     }
 
-    //emailAlreadyExists(): Alerts the user if the email they provided already exists
-    emailAlreadyExists() {
-    	swal({
-            title: "Email Already Exists",
-            text: "The provided email is already in use, please try a different one.",
+    //usernameAlreadyExists(): Alerts the user if the username they provided already exists
+    hashAlreadyUsed() {
+        swal({
+            title: "Código Secreto Caducado",
+            text: "El código secreto proporcionado ya fue utilizado para crear otro usuario",
             type: "error",
             allowOutsideClick: false
         }).catch(swal.noop)
     }
+
+    wrongHash() {
+        swal({
+            title: "Código Secreto Inválido",
+            text: "El código secreto proporcionado no existe",
+            type: "error",
+            allowOutsideClick: false
+        }).catch(swal.noop)
+    }
+
 }

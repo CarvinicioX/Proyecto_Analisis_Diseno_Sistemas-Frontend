@@ -6,14 +6,6 @@
         <h2>Formulario</h2>
         <!-- Register Form (Model Drive Form)-->
         <form [formGroup]="register_form" class="m-t" role="form" novalidate="novalidate"><!-- Register Form -->
-            <!-- Username Input -->
-            <div class="form-group">
-               <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['username'].valid && submitRegister), 'has-success':register_form.controls['username'].valid && submitRegister}">
-                   <input [formControl]="register_form.controls['username']" type="text" class="form-control" placeholder="Usuario" maxlength="25">
-                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-               </div>
-           </div>
-           <!-- End Username Input -->
            <!-- Email Input -->
            <div class="form-group">
                <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['email'].valid && submitRegister), 'has-success':register_form.controls['email'].valid && submitRegister}">
@@ -41,6 +33,14 @@
                <p class="text-danger" *ngIf="register_form.hasError('mismatchedPasswords') && submitRegister && register_form.controls['password'].valid">Las contraseñas tienen que ser iguales.</p>
            </div>
            <!-- End Verify Password Input -->
+          <!-- Hash Input -->
+          <div class="form-group">
+             <div class = "input-group" [ngClass]="{'has-error':(!register_form.controls['hash'].valid && submitRegister), 'has-success':register_form.controls['hash'].valid && submitRegister}">
+                 <input [textMask]="{mask: hash_mask}" [formControl]="register_form.controls['hash']" type="text" class="form-control" placeholder="Código Secreto" maxlength="14">
+                 <span class="input-group-addon"><i class="fa fa-certificate"></i></span>
+             </div>
+           </div>
+           <!-- End Hash Input -->
            <!-- Terms and Conditions -->
            <label>Al crear un usuario, usted acepta los <a (click)="terms_conditions_modal.show()">Términos y Referencias</a> de la plataforma virtual de aprendizaje.</label>
            <!-- Submit register form -->

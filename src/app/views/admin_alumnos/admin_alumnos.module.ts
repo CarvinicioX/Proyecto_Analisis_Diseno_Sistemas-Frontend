@@ -10,6 +10,9 @@ import {ModificarAlumnosComponent} from "./modificar_alumnos/modificar_alumnos.c
 import {AdminAlumnosService} from './admin_alumnos.service';
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
+import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {TextMaskModule} from 'angular2-text-mask';
+
 @NgModule({
   declarations: [
     AdminAlumnosComponent,
@@ -24,7 +27,9 @@ import {ModalModule} from 'ngx-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     LaddaModule,
-    ModalModule
+    ModalModule,
+    NgxMyDatePickerModule,
+    TextMaskModule
   ],
   exports: [
     AdminAlumnosComponent,

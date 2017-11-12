@@ -7,7 +7,7 @@ import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 //Third party libraries imports
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
-
+import {TextMaskModule} from 'angular2-text-mask';
 //Component Import
 import {RegisterComponent} from "./register.component";
 
@@ -26,7 +26,8 @@ import {RegisterService} from "./register.service";
     FormsModule,
     ReactiveFormsModule,
     LaddaModule,
-    ModalModule
+    ModalModule,
+    TextMaskModule
   ],
   //exports
   exports: [
