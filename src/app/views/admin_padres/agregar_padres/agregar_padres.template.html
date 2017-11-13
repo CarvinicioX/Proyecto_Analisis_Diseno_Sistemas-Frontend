@@ -42,7 +42,7 @@
                                 <label>Direccion*</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['direccion'].valid && submit_add, 'has-success':agregar_padres_form.controls['direccion'].valid && submit_add}">
                                     <input [formControl]="agregar_padres_form.controls['direccion']" type="text" class="form-control" placeholder="Ingrese un valor" maxlength="50">
-                                    <span class="input-group-addon"><i class="fa fa-location"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                                 </div>
                             </div>
                             <p class="text-danger" *ngIf="!agregar_padres_form.controls['direccion'].valid && submit_add">La direccion es requerida.</p> 
@@ -51,8 +51,8 @@
                             <div class="form-group form-group-margins">
                                 <label>Correo *</label>
                                 <div class = "input-group" [ngClass]="{'has-error':!agregar_padres_form.controls['correo'].valid && submit_add, 'has-success':agregar_padres_form.controls['correo'].valid && submit_add}">
-                                    <input [formControl]="agregar_padres_form.controls['correo']" type="email" class="form-control">
-                                    <span class="input-group-addon"><i class="fa fa-mail"></i></span>
+                                    <input [formControl]="agregar_padres_form.controls['correo']" type="email" class="form-control" placeholder="Ingrese un valor"> 
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                 </div>
                             </div>
                             <p class="text-danger" *ngIf="!agregar_padres_form.controls['correo'].valid && submit_add">El correo es requerido.</p> 

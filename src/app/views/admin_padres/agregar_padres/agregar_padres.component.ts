@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { default as swal } from 'sweetalert2';
 import { AdminPadresService } from '../admin_padres.service';
+import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 	@Component({
   selector: 'agregar_padres',
@@ -14,14 +16,15 @@ export class AgregarPadresComponent implements OnInit{
 
 	public agregar_padres_form:FormGroup;
 	public submit_add:boolean;
+  public adding:boolean;
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminPadresService){
+    this.adding = false;
 		this.submit_add = false;
 		this.agregar_padres_form = form_builder.group({
             'nombre' : ["", Validators.required],
             'telefono' : ["", Validators.required],
             'direccion' : ["", Validators.required],
-            'correo' : ["", Validators.required],
-            'id' : [{value: "", disabled: true}, ]
+            'correo' : ["", Validators.compose([Validators.required, Validators.email])]
         })
 	}
 
@@ -30,6 +33,7 @@ export class AgregarPadresComponent implements OnInit{
 
   agregar_padre(){
     if(this.agregar_padres_form.valid){
+      this.adding = true;
       this.submit_add = true;
       var load = {
         nombre:this.agregar_padres_form.controls['nombre'].value, 
@@ -40,13 +44,15 @@ export class AgregarPadresComponent implements OnInit{
       var response;
       this.service.insert_padre(load).subscribe(
         //store response
-        data => response = data,
-        err => console.log(err),
+        data => response = data[0],
+        err => {console.log(err);this.adding = false;this.internalServerError();},
         ()=> {
             if(response && response!=-1){//if not null, undefined,  or error
-              this.agregar_success();
+              this.agregar_success(response.hash);
+              this.adding = false;
             }else{
               this.internalServerError();
+              this.adding = false;
             }
         }
       );
@@ -63,14 +69,24 @@ export class AgregarPadresComponent implements OnInit{
     this.submit_add = false;
   }
 
-  agregar_success() {
+  agregar_success(hash) {
       swal({
           title: "Agregado Exitosamente",
           text: "Padre agregado de forma exitosa.",
+          confirmButtonText: '<i class="fa fa-thumbs-up"></i> Ver Código Secreto',
+          allowOutsideClick: false,
+          type: "success"
+      }).then(()=>{
+         swal({
+          title: hash,
+          text: "Guarde el código secreto para poder crear el usuario",
           confirmButtonText: '<i class="fa fa-thumbs-up"></i> Regresar',
           allowOutsideClick: false,
           type: "success"
-      }).then(()=>{this.clear_padre();})
+        }).then(()=>{
+          this.clear_padre();
+        })
+      }).catch(swal.noop)
   }
 
   internalServerError() {
