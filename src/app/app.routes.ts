@@ -7,6 +7,7 @@ import {RegisterComponent} from "./views/register/register.component";
 import {AdministracionComponent} from "./views/administracion/administracion.component";
 import {HomeComponent} from "./views/home/home.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
+import {CursosComponent} from "./views/cursos/cursos.component";
 
 //Alumnos
 import {AdminAlumnosComponent} from "./views/admin_alumnos/admin_alumnos.component";
@@ -58,7 +59,8 @@ export const ROUTES:Routes = [
   	{path: 'plataforma', component: BasicLayoutComponent, 
     children: [
       	{path: 'administracion', component: AdministracionComponent},
-      	{path: 'inicio', component: HomeComponent},
+        {path: 'inicio', component: HomeComponent},
+        {path: 'cursos', component: CursosComponent},        
       	{path: 'admin_secciones', component: AdminSeccionesComponent},
         {path: 'admin_secciones/agregar_secciones', component: AgregarSeccionesComponent},
         {path: 'admin_secciones/buscar_secciones', component: BuscarSeccionesComponent},

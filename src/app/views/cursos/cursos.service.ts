@@ -1,3 +1,4 @@
+//Native imports
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers , RequestOptions} from '@angular/http';
 
@@ -11,38 +12,38 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class AdminClasesService {
+export class AdminCursosService {
   //LoginService Constructor: Http reference
   constructor(private http: Http) {}
 
   //Port where the backend server is  running
   private baseUrl: string = "http://localhost:8000";
 
-  insert_clase(payload: any):Observable<any>{
+  insert_admin(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_clase",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/insert_admin",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  update_clase(payload: any):Observable<any>{
+  update_admin(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_clase",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/update_admin",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  delete_clase(payload: any):Observable<any>{
+  delete_admin(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_clase",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/delete_admin",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  get_clases():Observable<any>{
+  get_admin():Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.baseUrl+"/get_clases", options).map(this.extractData).catch(this.handleError);
+      return this.http.get(this.baseUrl+"/get_admin", options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object
