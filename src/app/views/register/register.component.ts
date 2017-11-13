@@ -70,31 +70,31 @@ export class RegisterComponent implements OnInit{
                 hash: this.register_form.controls['hash'].value
             };
             var response;
-                this.service.register(load).subscribe(
+            this.service.register(load).subscribe(
             //store response
             data => response = data[0],
             err => {console.log(err); this.internalServerError();this.loader = false;},
             ()=> {
-                if(response && response!=-1){
-                  if(response.success_status == -3){
-                      this.usernameAlreadyExists();
-                  }else if(response.success_status == -2){
-                      this.wrongHash();
-                  }else if(response.success_status == -1){
-                      this.hashAlreadyUsed();
-                  }else if(response.success_status == 0){
-                      this.registerSuccess();
-                  }
-                  this.loader = false;
-                }else{
-                  this.internalServerError();
-                  this.loader = false;
+              if(response && response!=-1){
+                if(response.success_status == -3){
+                  this.usernameAlreadyExists();
+                }else if(response.success_status == -2){
+                  this.wrongHash();
+                }else if(response.success_status == -1){
+                  this.hashAlreadyUsed();
+                }else if(response.success_status == 0){
+                  this.registerSuccess();
                 }
+                this.loader = false;
+              }else{
+                this.internalServerError();
+                this.loader = false;
+              }
             }
-      );
+          );
     	}else{
     		this.submitRegister = true;
-            this.loader = false;
+        this.loader = false;
     	}
     	
   	}

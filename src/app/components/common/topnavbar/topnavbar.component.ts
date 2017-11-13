@@ -25,6 +25,7 @@ export class TopNavbarComponent {
 
 	//logout(): clear sessionstorage
 	logout = function(){
+		sessionStorage.clear();
 		this.router.navigateByUrl('/login');
 	}
 

@@ -40,17 +40,71 @@ export class LoginComponent implements OnInit{
   ngOnInit(){
   }
 
-  //login(): Sends the information submitted into the login_form to the respective backend's endpoint using the LoginService reference.
   login(){
-    //Verifies if login_form is valid
+    //if register_form is valid
     if(this.login_form.valid){
-      this.router.navigateByUrl('/plataforma/inicio');
+      this.loader = true;
+      var load = {
+        username:this.login_form.controls['username_email'].value, 
+        password:this.login_form.controls['password'].value
+      };
+      var response;
+      this.service.login(load).subscribe(
+        //store response
+        data => response = data[0],
+        err => {console.log(err); this.internalServerError();this.loader = false;},
+        ()=> {
+          if(response && response!=-1){
+            if(response.success_status == -1){
+              this.loginError();
+              this.loader = false;
+            }else if(response.success_status == 1){
+              sessionStorage.setItem('loginInfo', JSON.stringify(response));
+              this.get_user(response.codigo, response.perfil_id);
+            }else{
+              console.log(response);
+              this.internalServerError();
+              this.loader = false;
+            }
+          }else{
+            this.internalServerError();
+            this.loader = false;
+          }
+        }
+        );
     }else{
-      //Sets submitLogin as TRUE if login_form is not valid
       this.submitLogin = true;
+      this.loader = false;
     }
 
   }
+
+  get_user(codigo, perfil){
+      var load = {
+        codigo:codigo, 
+        perfil:perfil
+      };
+      var response;
+      this.service.get_user(load).subscribe(
+        //store response
+      data => response = data[0],
+      err => {console.log(err); this.internalServerError();this.loader = false;},
+      ()=> {
+        if(response && response!=-1){
+          sessionStorage.setItem('userInfo', JSON.stringify(response));
+          console.log(sessionStorage.getItem('userInfo'));
+          console.log(sessionStorage.getItem('loginInfo'));
+          this.loader = false;
+          this.router.navigateByUrl('/plataforma/inicio');
+        }else{
+          this.internalServerError();
+          this.loader = false;
+        }
+      }
+      );
+
+  }
+
 
 
   //loginError(): Alerts the user if their password or username is incorrect
