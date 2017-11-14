@@ -21,6 +21,7 @@ import {AdminClasesModule} from "./views/admin_clases/admin_clases.module";
 import {AdminGradosModule} from "./views/admin_grados/admin_grados.module";
 import {AdminMaestrosModule} from "./views/admin_maestros/admin_maestros.module";
 import {AdminPadresModule} from "./views/admin_padres/admin_padres.module";
+import {TareasModule} from "./views/tareas/tareas.module";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {AdminPadresModule} from "./views/admin_padres/admin_padres.module";
     AdminGradosModule,
     AdminMaestrosModule,
     AdminPadresModule,
+    TareasModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
