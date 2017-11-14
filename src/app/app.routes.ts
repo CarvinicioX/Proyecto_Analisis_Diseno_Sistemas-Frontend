@@ -50,10 +50,16 @@ import {AgregarPadresComponent} from "./views/admin_padres/agregar_padres/agrega
 import {BuscarPadresComponent} from "./views/admin_padres/buscar_padres/buscar_padres.component";
 import {EliminarPadresComponent} from "./views/admin_padres/eliminar_padres/eliminar_padres.component";
 import {ModificarPadresComponent} from "./views/admin_padres/modificar_padres/modificar_padres.component";
+
 //Padres
 import {SeccionesMaestroComponent} from "./views/secciones_maestro/secciones_maestro.component";
 import {AgregarTareasComponent} from "./views/maestro_tareas/agregar_tareas/agregar_tareas.component";
 import {MaestroTareasComponent} from "./views/maestro_tareas/maestro_tareas.component";
+
+
+//Tareas
+import {TareasComponent} from "./views/tareas/tareas.component";
+
 
 export const ROUTES:Routes = [
   	{path: 'login', component: LoginComponent},
@@ -62,7 +68,8 @@ export const ROUTES:Routes = [
     children: [
       	{path: 'administracion', component: AdministracionComponent},
         {path: 'inicio', component: HomeComponent},
-        {path: 'cursos', component: CursosComponent},        
+        {path: 'cursos', component: CursosComponent},
+        {path: 'tareas', component: TareasComponent},        
       	{path: 'admin_secciones', component: AdminSeccionesComponent},
         {path: 'admin_secciones/agregar_secciones', component: AgregarSeccionesComponent},
         {path: 'admin_secciones/buscar_secciones', component: BuscarSeccionesComponent},
