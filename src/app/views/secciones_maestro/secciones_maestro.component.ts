@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { default as swal } from 'sweetalert2';
 import { SeccionesMaestroService } from './secciones_maestro.service';
+import { AdminClasesService} from './../admin_clases/admin_clases.service';
 
 @Component({
   selector: 'secciones_maestro',
@@ -26,9 +27,13 @@ export class SeccionesMaestroComponent implements OnInit{
 	public seccion_IDclase:string;
 	public seccionest:any;
 	public codigo:any;
-	
+	public clases:any;
+	public clasest:any;
 
-	constructor(private router:Router, private service:SeccionesMaestroService){
+
+
+
+	constructor(private router:Router, private service:SeccionesMaestroService,  private servicec:AdminClasesService){
 		this.order = "";
 		this.ascendent = false;
 		this.requestOffsetRight = 0;//set as 0
@@ -39,12 +44,16 @@ export class SeccionesMaestroComponent implements OnInit{
 		this.temp_secciones = [];
 		this.search_string = "";
 		this.codigo;
+		this.clases = [];
+		this.clasest= [];
 		
 	}
 
 	ngOnInit() {
+		this.getclases2();
 		this.get_secciones();
 		this.getid();
+		
 	}
 
 	get_secciones(){
@@ -65,6 +74,17 @@ export class SeccionesMaestroComponent implements OnInit{
 							
 						}
 					}
+					let j
+					//this.getclases();
+					console.log(this.clases);
+					for(i=0;i<this.seccionest.length;i++){
+						for(j=0;j<this.clases.length;j++)
+						if(this.seccionest[i].IDclase==this.clases[j].IDclase){
+							this.clasest.push(this.clases[j]);
+							
+						}
+					}
+
 					this.update_offsets();
 					
 					console.log(this.seccionest);
@@ -80,6 +100,54 @@ export class SeccionesMaestroComponent implements OnInit{
 		)
 		
 	}
+	getclases(){
+
+		var response;
+		this.servicec.get_clases().subscribe(
+			//store response
+			data => response = data,
+			err => console.log(err),
+			()=> {
+				if(response && response != -1){//if not null
+					this.clases = response;
+//					this.temp_clases = response;
+					this.update_offsets();
+				}else{
+					this.clases = [];
+//					this.temp_clases = [];
+					this.requestOffsetRight = 0;//set as 0
+					this.requestOffsetLeft = 0;//set as 0
+				}
+			   
+			}
+		);
+	}
+
+	getclases2(){
+
+		var response;
+		this.servicec.get_clases().subscribe(
+			//store response
+			data => response = data,
+			err => console.log(err),
+			()=> {
+				if(response && response != -1){//if not null
+					this.clases = response;
+					console.log("getclases2");
+					let k;
+					for(k = 0; k < 100; k++ )
+						console.log(this.clases);
+				
+					//console.log(response);
+				}else{
+					this.clases = [];
+				  
+				}
+			   
+			}
+		);
+	}
+
 	getid(){
 		
 		var c=sessionStorage.getItem('userInfo');

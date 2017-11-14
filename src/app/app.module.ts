@@ -13,6 +13,7 @@ import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {AdministracionModule} from "./views/administracion/administracion.module";
 import {CursosModule} from "./views/cursos/cursos.module";
+import {TareasModule} from "./views/tareas/tareas.module";
 import {HomeModule} from "./views/home/home.module";
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import {AdminSeccionesModule} from "./views/admin_secciones/admin_secciones.module";
@@ -21,12 +22,8 @@ import {AdminClasesModule} from "./views/admin_clases/admin_clases.module";
 import {AdminGradosModule} from "./views/admin_grados/admin_grados.module";
 import {AdminMaestrosModule} from "./views/admin_maestros/admin_maestros.module";
 import {AdminPadresModule} from "./views/admin_padres/admin_padres.module";
-<<<<<<< HEAD
 import {SeccionesMaestroModule} from "./views/secciones_maestro/secciones_maestro.module";
 import {MaestroTareasModule} from "./views/maestro_tareas/maestro_tareas.module";
-=======
-import {TareasModule} from "./views/tareas/tareas.module";
->>>>>>> 1c61810d04ca745e52c1f5ff351372be92037e1e
 
 @NgModule({
   declarations: [
@@ -42,6 +39,7 @@ import {TareasModule} from "./views/tareas/tareas.module";
     RegisterModule,
     AdministracionModule,
     CursosModule,
+    TareasModule,
     HomeModule,
     AdminSeccionesModule,
     AdminAlumnosModule,
@@ -49,12 +47,8 @@ import {TareasModule} from "./views/tareas/tareas.module";
     AdminGradosModule,
     AdminMaestrosModule,
     AdminPadresModule,
-<<<<<<< HEAD
     SeccionesMaestroModule,
     MaestroTareasModule,
-=======
-    TareasModule,
->>>>>>> 1c61810d04ca745e52c1f5ff351372be92037e1e
     RouterModule.forRoot(ROUTES)
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
