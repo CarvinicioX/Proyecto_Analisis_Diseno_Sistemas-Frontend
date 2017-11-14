@@ -50,8 +50,10 @@ import {AgregarPadresComponent} from "./views/admin_padres/agregar_padres/agrega
 import {BuscarPadresComponent} from "./views/admin_padres/buscar_padres/buscar_padres.component";
 import {EliminarPadresComponent} from "./views/admin_padres/eliminar_padres/eliminar_padres.component";
 import {ModificarPadresComponent} from "./views/admin_padres/modificar_padres/modificar_padres.component";
-
-
+//Padres
+import {SeccionesMaestroComponent} from "./views/secciones_maestro/secciones_maestro.component";
+import {AgregarTareasComponent} from "./views/maestro_tareas/agregar_tareas/agregar_tareas.component";
+import {MaestroTareasComponent} from "./views/maestro_tareas/maestro_tareas.component";
 
 export const ROUTES:Routes = [
   	{path: 'login', component: LoginComponent},
@@ -90,8 +92,10 @@ export const ROUTES:Routes = [
         {path: 'admin_padres/agregar_padres', component: AgregarPadresComponent},
         {path: 'admin_padres/buscar_padres', component: BuscarPadresComponent},
         {path: 'admin_padres/eliminar_padres', component: EliminarPadresComponent},
-	      {path: 'admin_padres/modificar_padres', component: ModificarPadresComponent},
-
+        {path: 'admin_padres/modificar_padres', component: ModificarPadresComponent},
+        {path: 'secciones_maestro', component: SeccionesMaestroComponent},
+        {path: 'maestro_tareas/agregar_tareas/:id', component: AgregarTareasComponent},
+        {path: 'maestro_tareas/:id', component: MaestroTareasComponent},
     ]
   },
   {path: '**',  redirectTo: 'login'}
