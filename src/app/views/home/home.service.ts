@@ -18,8 +18,8 @@ export class HomeService {
 	constructor(private http: Http) {}
 
     //Port where the backend server is  running
-  	private baseUrl: string = "http://localhost:8000";
-
+    private baseUrl: string = "https://analisisbackend.herokuapp.com";
+    
     //read_notification function
     read_notification(payload: any):Observable<any>{
         let bodyString = JSON.stringify(payload);

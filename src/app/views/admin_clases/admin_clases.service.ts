@@ -16,8 +16,8 @@ export class AdminClasesService {
   constructor(private http: Http) {}
 
   //Port where the backend server is  running
-  private baseUrl: string = "http://localhost:8000";
-
+  private baseUrl: string = "https://analisisbackend.herokuapp.com";
+  
   insert_clase(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
