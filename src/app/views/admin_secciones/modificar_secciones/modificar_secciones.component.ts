@@ -15,19 +15,19 @@ import { AdminClasesService } from './../../admin_clases/admin_clases.service';
 
 export class ModificarSeccionesComponent implements OnInit{
 
-	private secciones:any;
-	private order:string;
-    private ascendent:boolean;
-    private requestOffsetRight:number;//requestTable offset to control request browsing
-    private requestOffsetLeft:number;//requestTable offset to control request browsing
-    private offsetView:number;
-    private temp_secciones:any;
-    private search_string:string;
-    private agregar_secciones_form:FormGroup;
-    private submit_add:boolean;
-    private grados:any;
-    private maestros:any;
-    private clases:any;
+	public secciones:any;
+	public order:string;
+    public ascendent:boolean;
+    public requestOffsetRight:number;//requestTable offset to control request browsing
+    public requestOffsetLeft:number;//requestTable offset to control request browsing
+    public offsetView:number;
+    public temp_secciones:any;
+    public search_string:string;
+    public agregar_secciones_form:FormGroup;
+    public submit_add:boolean;
+    public grados:any;
+    public maestros:any;
+    public clases:any;
 
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService, private servicem:AdminMaestrosService, private serviceg:AdminGradosService, private servicec:AdminClasesService){
         this.submit_add = false;

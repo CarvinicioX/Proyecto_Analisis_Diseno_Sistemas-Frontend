@@ -19,31 +19,11 @@ export class AdminCursosService {
   //Port where the backend server is  running
   private baseUrl: string = "http://localhost:8000";
 
-  insert_admin(payload: any):Observable<any>{
+  get_cursos(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_admin",bodyString, options).map(this.extractData).catch(this.handleError);
-  }
-
-  update_admin(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_admin",bodyString, options).map(this.extractData).catch(this.handleError);
-  }
-
-  delete_admin(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_admin",bodyString, options).map(this.extractData).catch(this.handleError);
-  }
-
-  get_admin():Observable<any>{
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.baseUrl+"/get_admin", options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/get_cursos_maestros",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object

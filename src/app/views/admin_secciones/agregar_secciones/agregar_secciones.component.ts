@@ -16,11 +16,11 @@ import { AdminClasesService } from './../../admin_clases/admin_clases.service';
 export class AgregarSeccionesComponent implements OnInit{
 
 
-  private agregar_secciones_form:FormGroup;
-  private submit_add:boolean;
-  private maestros:any;
-  private clases:any;
-  private grados:any;
+  public agregar_secciones_form:FormGroup;
+  public submit_add:boolean;
+  public maestros:any;
+  public clases:any;
+  public grados:any;
   
 	constructor(form_builder: FormBuilder, private router:Router, private service:AdminSeccionesService, private servicem:AdminMaestrosService, private serviceg:AdminGradosService, private servicec:AdminClasesService){
     this.submit_add = false;
@@ -71,7 +71,6 @@ get_grados(){
           if(response && response != -1){//if not null
               this.grados = response;
               console.log(this.grados);
-              console.log("peeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")          
           }else{
               this.grados = [];
              
