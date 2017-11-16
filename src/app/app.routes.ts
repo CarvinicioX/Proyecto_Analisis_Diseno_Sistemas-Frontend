@@ -59,6 +59,7 @@ import {MaestroTareasComponent} from "./views/maestro_tareas/maestro_tareas.comp
 
 //Tareas
 import {TareasComponent} from "./views/tareas/tareas.component";
+import {TareasSeccionComponent} from "./views/tareas_seccion/tareas_seccion.component";
 
 
 export const ROUTES:Routes = [
@@ -103,6 +104,7 @@ export const ROUTES:Routes = [
         {path: 'secciones_maestro', component: SeccionesMaestroComponent},
         {path: 'maestro_tareas/agregar_tareas/:id', component: AgregarTareasComponent},
         {path: 'maestro_tareas/:id', component: MaestroTareasComponent},
+        {path: 'secciones_tareas/:id', component: TareasSeccionComponent},
     ]
   },
   {path: '**',  redirectTo: 'login'}

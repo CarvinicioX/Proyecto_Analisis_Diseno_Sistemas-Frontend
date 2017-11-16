@@ -24,7 +24,7 @@ import {AdminMaestrosModule} from "./views/admin_maestros/admin_maestros.module"
 import {AdminPadresModule} from "./views/admin_padres/admin_padres.module";
 import {SeccionesMaestroModule} from "./views/secciones_maestro/secciones_maestro.module";
 import {MaestroTareasModule} from "./views/maestro_tareas/maestro_tareas.module";
-
+import {TareasSeccionModule} from "./views/tareas_seccion/tareas_seccion.module";
 @NgModule({
   declarations: [
     AppComponent
@@ -35,6 +35,7 @@ import {MaestroTareasModule} from "./views/maestro_tareas/maestro_tareas.module"
     ReactiveFormsModule,
     HttpModule,
     LayoutsModule,
+    TareasSeccionModule,
     LoginModule,
     RegisterModule,
     AdministracionModule,
