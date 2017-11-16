@@ -55,7 +55,7 @@ import {ModificarPadresComponent} from "./views/admin_padres/modificar_padres/mo
 import {SeccionesMaestroComponent} from "./views/secciones_maestro/secciones_maestro.component";
 import {AgregarTareasComponent} from "./views/maestro_tareas/agregar_tareas/agregar_tareas.component";
 import {MaestroTareasComponent} from "./views/maestro_tareas/maestro_tareas.component";
-
+import {CalificacionesTareasComponent} from "./views/maestro_tareas/ver_calificaciones/ver_calificaciones.component";
 
 //Tareas
 import {TareasComponent} from "./views/tareas/tareas.component";
@@ -105,6 +105,7 @@ export const ROUTES:Routes = [
         {path: 'maestro_tareas/agregar_tareas/:id', component: AgregarTareasComponent},
         {path: 'maestro_tareas/:id', component: MaestroTareasComponent},
         {path: 'secciones_tareas/:id', component: TareasSeccionComponent},
+        {path: 'calificaciones/:id', component: CalificacionesTareasComponent},
     ]
   },
   {path: '**',  redirectTo: 'login'}

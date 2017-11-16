@@ -42,7 +42,8 @@ export class AgregarAlumnosComponent implements OnInit{
         nombres:this.agregar_alumnos_form.controls['nombres'].value, 
         apellidos:this.agregar_alumnos_form.controls['apellidos'].value, 
         nacimiento: date_string,
-        departamento: this.agregar_alumnos_form.controls['departamento'].value
+        departamento: this.agregar_alumnos_form.controls['departamento'].value,
+        //iDgrado:0
       };
       var response;
       this.service.insert_alumno(load).subscribe(

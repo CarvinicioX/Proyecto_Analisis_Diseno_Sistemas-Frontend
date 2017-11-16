@@ -12,39 +12,39 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class AdminAlumnosService {
+export class CalificacionesTareasService {
   //LoginService Constructor: Http reference
   constructor(private http: Http) {}
 
   //Port where the backend server is  running
   private baseUrl: string = "https://analisisbackend.herokuapp.com";
 
-  insert_alumno(payload: any):Observable<any>{
+  insert_calificacion(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/insert_calificacion",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  update_alumno(payload: any):Observable<any>{
+  update_calificacion(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/update_calificacion",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  delete_alumno(payload: any):Observable<any>{
+  delete_calificacion(payload: any):Observable<any>{
       let bodyString = JSON.stringify(payload);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_alumno",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/delete_calificacion",bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  get_alumnos():Observable<any>{
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.baseUrl+"/get_alumnos", options).map(this.extractData).catch(this.handleError);
-  }
+  get_calificaciones():Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.baseUrl+"/get_calificaciones", options).map(this.extractData).catch(this.handleError);
+}
 
   //Extract data as Json object
   private extractData(res:Response) {
