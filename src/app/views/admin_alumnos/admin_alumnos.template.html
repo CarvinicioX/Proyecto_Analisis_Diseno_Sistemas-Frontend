@@ -11,62 +11,391 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="well white-bg animated fadeInRight">
+            <div class="well white-bg animated fadeInRight extra-padding">
                 <div class = "row">
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget navy-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_alumnos/agregar_alumnos']">
-                            <div class="m-b-md">
-                                <i class="fa fa-plus fa-4x"></i>
+                    <div class="col-xs-12">
+                        <div class=" menu-container no-select">
+                            <div class="menu-start">
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                            </div>
+                            <div class="menu-item text-center " (click)="open_search()">
+                                <h2 class="no-margins text-color-purple"><i class="fa fa-search"></i></h2>
+                                <p class="menu-text no-margins">Buscar</p>
+                            </div>
+                            <div class="menu-item text-center" (click)="open_add()">
+                                <h2 class="no-margins text-color-blue"><i class="fa fa-plus-square"></i></h2>
+                                <p class="menu-text no-margins">Agregar</p>
+                            </div>
+                            <div bsModal #buscar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Consultar Alumnos</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="search_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Código</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="search_form.controls['codigo']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Departamento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <select [formControl]="search_form.controls['departamento']" class="form-control">
+                                                                        <option value="">Seleccionar...</option>
+                                                                        <option>Atlántida</option>
+                                                                        <option>Choluteca</option>
+                                                                        <option>Colón</option>
+                                                                        <option>Comayagua</option>
+                                                                        <option>Copán</option>
+                                                                        <option>Cortes</option>
+                                                                        <option>El Paraíso</option>
+                                                                        <option>Francisco Morazán</option>
+                                                                        <option>Gracias a Dios</option>
+                                                                        <option>Intibucá</option>
+                                                                        <option>Islas de la Bahía</option>
+                                                                        <option>La Paz</option>
+                                                                        <option>Lempira</option>
+                                                                        <option>Ocotepeque</option>
+                                                                        <option>Olancho</option>
+                                                                        <option>Santa Bárbara</option>
+                                                                        <option>Valle</option>
+                                                                        <option>Yoro</option>
+                                                                    </select>
+                                                                    <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nombres</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="search_form.controls['nombres']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Apellidos</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="search_form.controls['apellidos']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nacimiento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="search_form.controls['nacimiento']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" (click)="close_search()">Cancelar</button>
+                                            <button type="button" class="btn btn-info" (click)="clean_search()">Limpiar Campos</button>
+                                            <button type="button" class="btn btn-success" (click)="do_search()">Consultar Alumnos</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <h1 class="m-xs">Agregar</h1>
+                            <div bsModal #agregar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Agregar Alumnos</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="add_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nombres</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!add_form.controls['nombres'].valid || !validate_trim(add_form.controls['nombres'].value)) && submit_add}">
+                                                                    <input [formControl]="add_form.controls['nombres']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(add_form.controls['nombres'].hasError('required')||!validate_trim(add_form.controls['nombres'].value)) && submit_add"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Apellidos</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!add_form.controls['apellidos'].valid || !validate_trim(add_form.controls['apellidos'].value)) && submit_add}">
+                                                                    <input [formControl]="add_form.controls['apellidos']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(add_form.controls['apellidos'].hasError('required')||!validate_trim(add_form.controls['apellidos'].value)) && submit_add"><i class="fa fa-warning"></i> El apellido es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nacimiento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!add_form.controls['nacimiento'].valid || !validate_fecha_nacimiento()) && submit_add}">
+                                                                    <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" [formControl]="add_form.controls['nacimiento']" type="text" class="form-control" placeholder="YYYY/MM/DD">      
+                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimientp="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento($event)">
+                                                                    <span (click)="calendario_nacimientp.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="add_form.controls['nacimiento'].hasError('required') && submit_add"><i class="fa fa-warning"></i> La fecha de nacimiento es requerida.</p> 
+                                                                <p class="text-danger" *ngIf="add_form.controls['nacimiento'].hasError('pattern') && submit_add"><i class="fa fa-warning"></i> Formato de fecha inválido.</p> 
+                                                                <p class="text-danger" *ngIf="add_form.controls['nacimiento'].valid && !validate_fecha_nacimiento() && submit_add"><i class="fa fa-warning"></i> Fecha de nacimiento no puede ser superior a la fecha actual.</p> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Departamento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':!add_form.controls['departamento'].valid && submit_add}">
+                                                                    <select [formControl]="add_form.controls['departamento']" class="form-control">
+                                                                        <option value="" disabled="true">Seleccionar...</option>
+                                                                        <option>Atlántida</option>
+                                                                        <option>Choluteca</option>
+                                                                        <option>Colón</option>
+                                                                        <option>Comayagua</option>
+                                                                        <option>Copán</option>
+                                                                        <option>Cortes</option>
+                                                                        <option>El Paraíso</option>
+                                                                        <option>Francisco Morazán</option>
+                                                                        <option>Gracias a Dios</option>
+                                                                        <option>Intibucá</option>
+                                                                        <option>Islas de la Bahía</option>
+                                                                        <option>La Paz</option>
+                                                                        <option>Lempira</option>
+                                                                        <option>Ocotepeque</option>
+                                                                        <option>Olancho</option>
+                                                                        <option>Santa Bárbara</option>
+                                                                        <option>Valle</option>
+                                                                        <option>Yoro</option>
+                                                                    </select>
+                                                                    <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="add_form.controls['departamento'].hasError('required') && submit_add"><i class="fa fa-warning"></i> El departamento es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" (click)="close_add()">Cancelar</button>
+                                            <button type="button" class="btn btn-info" (click)="clean_add()">Limpiar Campos</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="do_add()">Agregar Alumno</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <h3 class="font-bold no-margins">
-                                    Alumno
-                                </h3>
+                            <div bsModal #editar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Editar Alumnos</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="editar_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Código</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="editar_form.controls['codigo']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nombres</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!editar_form.controls['nombres'].valid || !validate_trim(editar_form.controls['nombres'].value)) && submit_edit}">
+                                                                    <input [formControl]="editar_form.controls['nombres']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(editar_form.controls['nombres'].hasError('required')||!validate_trim(editar_form.controls['nombres'].value)) && submit_edit"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Apellidos</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!editar_form.controls['apellidos'].valid || !validate_trim(editar_form.controls['apellidos'].value)) && submit_edit}">
+                                                                    <input [formControl]="editar_form.controls['apellidos']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(editar_form.controls['apellidos'].hasError('required')||!validate_trim(editar_form.controls['apellidos'].value)) && submit_edit"><i class="fa fa-warning"></i> El apellido es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nacimiento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!editar_form.controls['nacimiento'].valid || !validate_fecha_nacimiento_edit()) && submit_edit}">
+                                                                    <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" [formControl]="editar_form.controls['nacimiento']" type="text" class="form-control" placeholder="YYYY/MM/DD">      
+                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimientp="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento_edit($event)">
+                                                                    <span (click)="calendario_nacimientp.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="editar_form.controls['nacimiento'].hasError('required') && submit_edit"><i class="fa fa-warning"></i> La fecha de nacimiento es requerida.</p> 
+                                                                <p class="text-danger" *ngIf="editar_form.controls['nacimiento'].hasError('pattern') && submit_edit"><i class="fa fa-warning"></i> Formato de fecha inválido.</p> 
+                                                                <p class="text-danger" *ngIf="editar_form.controls['nacimiento'].valid && !validate_fecha_nacimiento_edit() && submit_edit"><i class="fa fa-warning"></i> Fecha de nacimiento no puede ser superior a la fecha actual.</p> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Departamento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':!editar_form.controls['departamento'].valid && submit_edit}">
+                                                                    <select [formControl]="editar_form.controls['departamento']" class="form-control">
+                                                                        <option value="" disabled="true">Seleccionar...</option>
+                                                                        <option>Atlántida</option>
+                                                                        <option>Choluteca</option>
+                                                                        <option>Colón</option>
+                                                                        <option>Comayagua</option>
+                                                                        <option>Copán</option>
+                                                                        <option>Cortes</option>
+                                                                        <option>El Paraíso</option>
+                                                                        <option>Francisco Morazán</option>
+                                                                        <option>Gracias a Dios</option>
+                                                                        <option>Intibucá</option>
+                                                                        <option>Islas de la Bahía</option>
+                                                                        <option>La Paz</option>
+                                                                        <option>Lempira</option>
+                                                                        <option>Ocotepeque</option>
+                                                                        <option>Olancho</option>
+                                                                        <option>Santa Bárbara</option>
+                                                                        <option>Valle</option>
+                                                                        <option>Yoro</option>
+                                                                    </select>
+                                                                    <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="editar_form.controls['departamento'].hasError('required') && submit_edit"><i class="fa fa-warning"></i> El departamento es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" (click)="close_edit()">Cancelar</button>
+                                            <button [ladda]="loading_edit" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="do_edit()">Editar Alumno</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div bsModal #ver_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Ver Alumno</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="ver_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Código</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['codigo']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Hash Secreto</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['hash']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-hashtag"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nombres</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['nombres']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Apellidos</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['apellidos']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Nacimiento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['nacimiento']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label><b>Departamento</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="ver_form.controls['departamento']" class="form-control" type="text">
+                                                                    <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <iframe type="application/pdf" [src]="" class="ficha_pdf" id="pdf_frame">
+                                                Su explorador de internet es demasiado viejo como para mostrar el PDF. Intente descargarlo y visualizarlo en su computadora.
+                                                </iframe>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-warning" (click)="close_view()">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget yellow-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_alumnos/modificar_alumnos']">
-                            <div class="m-b-md">
-                                <i class="fa fa-edit fa-4x"></i>
-
-                                <h1 class="m-xs">Modificar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Alumno
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget lazur-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_alumnos/buscar_alumnos']">
-                            <div class="m-b-md">
-                                <i class="fa fa-search fa-4x"></i>
-
-                                <h1 class="m-xs">Buscar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Alumno
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget red-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_alumnos/eliminar_alumnos']">
-                            <div class="m-b-md">
-                                <i class="fa fa-trash fa-4x"></i>
-
-                                <h1 class="m-xs">Eliminar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Alumno
-                                </h3>
-                            </div>
-                        </div>
+                        <makoto-datatable [data_array]="resultados" [options]="datatable_options" [loading]="{loading:resultados_loading}" (delete)="delete_alumno($event)" (view)="open_view($event)" (edit)="open_edit($event)" #datatable></makoto-datatable>
                     </div>
                 </div>
             </div> 
         </div>
     </div>
 </div>
+

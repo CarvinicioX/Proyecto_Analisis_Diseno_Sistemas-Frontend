@@ -1,0 +1,109 @@
+<!--INICIO TEMPLATE DATATABLE-->
+
+    <!--INICIO ENCABEZADO-->
+    <header class="makoto-dt-header">
+        <span class="makoto-dt-icon"> <i class="fa fa-table"></i> </span>
+        <h2 class="makoto-dt-title">{{options_value.title}}</h2>
+    </header>
+    <!--FINAL ENCABEZADO-->
+    <!--INICIO SPINNER (LOADER)-->
+    <div class="spinner-box sk-loading" *ngIf="loading.loading">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+          </div>
+    </div>
+    <!--FINAL SPINNER (LOADER)-->
+    <!--INICIO MENU SUPERIOR-->
+<div class="makoto-dt-box">
+    <div class="row makoto-dt-after-header" *ngIf="resultados.length>0 || filtering">
+        <div class="col-sm-6 col-md-4">
+            <!--INICIO CAMPO DE BUSQUEDA-->
+            <div class="input-group" *ngIf="options_value.show_search_field">
+                <input  type="text" class="form-control input-sm" [(ngModel)]="search_word" #search_input="ngModel" placeholder="Buscar...">
+                <span class="input-group-addon search-icon" (click)="filter_search()"><i class="fa fa-search"></i></span>
+            </div>
+            <!--FINAL CAMPO DE BUSQUEDA-->
+        </div>
+        <div class="col-sm-6 col-md-8">
+            <!--INICIO CAMBIO DE PAGINACION-->
+            <div class="pagination-select pull-right">
+                <form #pagination_form="ngForm">
+                    <select class="form-control" (ngModelChange)="onChangeSelection($event)" [ngModel]="offsetView" (change)="update_offsets()" name="pag">
+                        <option *ngFor="let offset of options_value.navigation_offsets">{{offset}}</option>
+                    </select>
+                </form>
+            </div>
+            <!--FINAL CAMBIO DE PAGINACION-->
+        </div>
+    </div>
+    <!--FINAL MENU SUPERIOR-->
+    <!--INICIO TEXTO VACIO-->
+    <div *ngIf="resultados.length==0 && !filtering && !loading.loading">
+        <h3 class="text-center text-info makoto-dt-info">{{options_value.empty_text}}</h3>
+        <br>
+    </div>
+    <!--FINAL TEXTO VACIO-->
+    <!--INICIO TEXTO CLAVE NO ENCONTRADO-->
+    <div *ngIf="resultados.length==0 && filtering && !loading.loading">
+        <h3 class="text-center text-info makoto-dt-info">Palabra clave no encontrada</h3>
+        <br>
+    </div>
+    <!--FINAL TEXTO CLAVE NO ENCONTRADO-->
+    <div *ngIf="resultados.length>0">
+        <div class="no-padding">
+            <div class="table-responsive">
+                <!--INICIO TABLA-->
+                <table class="table table-bordered table-hover no-margins">
+                    <!--INICIO ENCABEZADO DE TABLA-->
+                    <thead>
+                        <tr>
+                            <th *ngFor="let header of options_value.columns;let i = index" class="makoto-dt-no-select makoto-dt-sort-header" (click)="sort_column(i)">
+                                {{options_value.columns_headers[i]}} <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order==options_value.columns[i], 'fa-arrow-down':!ascendent && order==options_value.columns[i], 'fa-sort':order!=options_value.columns[i]}"></i></th>
+                            <th *ngIf="options_value.options.view || options_value.options.edit || options_value.options.delete" class="no-select text-center makoto-dt-options-header" colspan="999">{{options_value.options_header}}</th>
+                        </tr>
+                    </thead>
+                    <!--FINAL ENCABEZADO DE TABLA-->
+                    <!--INICIO ENCABEZADO DE CUERPO-->
+                    <tbody>
+                        <tr *ngFor="let x of displaying; let i = index">
+                            <td *ngFor="let column of options_value.columns" class='makoto-dt-table'>{{resultados[requestOffsetLeft -1 + i][column]}}</td>
+
+                            <td *ngIf="options_value.options.view" (click)="view_event(i)" class="text-center makoto-dt-open makoto-dt-table"><i class="fa fa-search"></i></td>
+                            <td *ngIf="options_value.options.edit" (click)="edit_event(i)" class="text-center makoto-dt-edit makoto-dt-table"><i class="fa fa-edit"></i></td>
+                            <td *ngIf="options_value.options.delete" (click)="delete_event(i)" class="text-center makoto-dt-delete makoto-dt-table"><i class="fa fa-trash-o"></i></td>
+                        </tr>
+                    </tbody>
+                    <!--FINAL ENCABEZADO DE CUERPO-->
+                </table>
+                <!--FINAL TABLA-->
+            </div>
+            <!--INICIO PIE-->
+            <div class="makoto-dt-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!--INICIO MOSTRANDO-->
+                        <p class="pull-left makoto-dt-showing-text">Mostrando <b>{{requestOffsetLeft}}</b> - <b>{{requestOffsetRight}}</b> de <b>{{resultados.length}}</b> registros.</p>
+                        <!--FINAL MOSTRANDO-->
+                        <!--INICIO PAGINACION-->
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-primary" type="button" (click)="updateRequestsGoLeft()" [disabled]="requestOffsetLeft <=1"><i class="fa fa-arrow-left"></i></button>
+                            <button (click)="pagination_navigation(nav_min_value())" type="button" class="btn makoto-dt-nav-end btn-sm btn-default"><b>Inicio</b></button>
+                            <div class="btn-group" *ngFor="let nav of pag_reference;let i = index">
+                                <button  *ngIf="nav_show(i + 1)" (click)="pagination_navigation(i+1)" type="button" class="btn nav-btn btn-sm btn-default" [class.makoto-dt-nav-active]="nav_current_value() == i+1">{{i+1}}</button>
+                            </div>
+                            <button (click)="pagination_navigation(nav_max_value())" type="button" class="btn makoto-dt-nav-end btn-sm btn-default"><b>Final</b></button>
+                            <button class="btn btn-sm btn-primary" type="button" (click)="updateRequestsGoRight()" [disabled]="requestOffsetRight >= resultados.length"><i class="fa fa-arrow-right"></i></button>
+                        </div>
+                        <!--FINAL PAGINACION-->
+                    </div>
+                </div>
+            </div>
+            <!--FINAL PIE-->
+        </div>
+    </div>
+</div>
+<!--FINAL TEMPLATE DATATABLE-->

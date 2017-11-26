@@ -7,14 +7,9 @@ import {RegisterComponent} from "./views/register/register.component";
 import {AdministracionComponent} from "./views/administracion/administracion.component";
 import {HomeComponent} from "./views/home/home.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
-import {CursosComponent} from "./views/cursos/cursos.component";
 
 //Alumnos
 import {AdminAlumnosComponent} from "./views/admin_alumnos/admin_alumnos.component";
-import {AgregarAlumnosComponent} from "./views/admin_alumnos/agregar_alumnos/agregar_alumnos.component";
-import {BuscarAlumnosComponent} from "./views/admin_alumnos/buscar_alumnos/buscar_alumnos.component";
-import {EliminarAlumnosComponent} from "./views/admin_alumnos/eliminar_alumnos/eliminar_alumnos.component";
-import {ModificarAlumnosComponent} from "./views/admin_alumnos/modificar_alumnos/modificar_alumnos.component";
 
 //Secciones
 import {AdminSeccionesComponent} from "./views/admin_secciones/admin_secciones.component";
@@ -51,15 +46,6 @@ import {BuscarPadresComponent} from "./views/admin_padres/buscar_padres/buscar_p
 import {EliminarPadresComponent} from "./views/admin_padres/eliminar_padres/eliminar_padres.component";
 import {ModificarPadresComponent} from "./views/admin_padres/modificar_padres/modificar_padres.component";
 
-//Padres
-import {SeccionesMaestroComponent} from "./views/secciones_maestro/secciones_maestro.component";
-import {AgregarTareasComponent} from "./views/maestro_tareas/agregar_tareas/agregar_tareas.component";
-import {MaestroTareasComponent} from "./views/maestro_tareas/maestro_tareas.component";
-import {CalificacionesTareasComponent} from "./views/maestro_tareas/ver_calificaciones/ver_calificaciones.component";
-
-//Tareas
-import {TareasComponent} from "./views/tareas/tareas.component";
-import {TareasSeccionComponent} from "./views/tareas_seccion/tareas_seccion.component";
 
 
 export const ROUTES:Routes = [
@@ -68,19 +54,13 @@ export const ROUTES:Routes = [
   	{path: 'plataforma', component: BasicLayoutComponent, 
     children: [
       	{path: 'administracion', component: AdministracionComponent},
-        {path: 'inicio', component: HomeComponent},
-        {path: 'cursos', component: CursosComponent},
-        {path: 'tareas', component: TareasComponent},        
+      	{path: 'inicio', component: HomeComponent},
       	{path: 'admin_secciones', component: AdminSeccionesComponent},
         {path: 'admin_secciones/agregar_secciones', component: AgregarSeccionesComponent},
         {path: 'admin_secciones/buscar_secciones', component: BuscarSeccionesComponent},
         {path: 'admin_secciones/eliminar_secciones', component: EliminarSeccionesComponent},
         {path: 'admin_secciones/modificar_secciones', component: ModificarSeccionesComponent},
         {path: 'admin_alumnos', component: AdminAlumnosComponent},
-        {path: 'admin_alumnos/agregar_alumnos', component: AgregarAlumnosComponent},
-        {path: 'admin_alumnos/buscar_alumnos', component: BuscarAlumnosComponent},
-        {path: 'admin_alumnos/eliminar_alumnos', component: EliminarAlumnosComponent},
-        {path: 'admin_alumnos/modificar_alumnos', component: ModificarAlumnosComponent},
         {path: 'admin_grados', component: AdminGradosComponent},        
         {path: 'admin_grados/agregar_grados', component: AgregarGradosComponent},
         {path: 'admin_grados/buscar_grados', component: BuscarGradosComponent},
@@ -100,12 +80,8 @@ export const ROUTES:Routes = [
         {path: 'admin_padres/agregar_padres', component: AgregarPadresComponent},
         {path: 'admin_padres/buscar_padres', component: BuscarPadresComponent},
         {path: 'admin_padres/eliminar_padres', component: EliminarPadresComponent},
-        {path: 'admin_padres/modificar_padres', component: ModificarPadresComponent},
-        {path: 'secciones_maestro', component: SeccionesMaestroComponent},
-        {path: 'maestro_tareas/agregar_tareas/:id', component: AgregarTareasComponent},
-        {path: 'maestro_tareas/:id', component: MaestroTareasComponent},
-        {path: 'secciones_tareas/:id', component: TareasSeccionComponent},
-        {path: 'calificaciones/:id', component: CalificacionesTareasComponent},
+	      {path: 'admin_padres/modificar_padres', component: ModificarPadresComponent},
+
     ]
   },
   {path: '**',  redirectTo: 'login'}

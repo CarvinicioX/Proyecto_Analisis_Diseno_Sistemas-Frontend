@@ -16,8 +16,8 @@ export class RegisterService {
 	constructor(private http: Http) {}
 
   //Port where the backend server is  running
-  private baseUrl: string = "https://analisisbackend.herokuapp.com";
-  
+  private baseUrl: string = "http://localhost:8000";
+
   //register function calls register endpoint
   register(payload: any):Observable<any>{
     let bodyString = JSON.stringify(payload);

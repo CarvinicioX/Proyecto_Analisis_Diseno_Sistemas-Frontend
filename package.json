@@ -40,7 +40,7 @@
     "pdfmake": "0.1.28",
     "peity": "3.2.1",
     "rxjs": "5.1.0",
-    "sweetalert2": "6.6.2",
+    "sweetalert2": "~7.0.3",
     "text-mask-addons": "^3.7.1",
     "zone.js": "0.8.4"
   },

@@ -19,10 +19,6 @@
       <li [ngClass]="{active: activeRoute('administracion')||activeRoute('admin_secciones')||activeRoute('admin_alumnos') ||activeRoute('admin_grados') ||activeRoute('admin_clases')||activeRoute('admin_maestros')||activeRoute('admin_padres')}">
         <a [routerLink]="['/plataforma/administracion']"><i class="fa fa-cogs"></i> <span class="nav-label">Administración</span></a>
       </li>
-      
-      <li [ngClass]="{active: activeRoute('secciones_maestro')}">
-      	<a [routerLink]="['/plataforma/secciones_maestro']"><i class="fa fa-cogs"></i>  <span class="nav-label">Mis Cursos</span></a>
-      </li>
       <!-- End Navbar Items -->
     </ul>
   </div>

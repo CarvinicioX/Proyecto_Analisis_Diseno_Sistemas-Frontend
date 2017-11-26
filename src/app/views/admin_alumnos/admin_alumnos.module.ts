@@ -3,23 +3,17 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {AdminAlumnosComponent} from "./admin_alumnos.component";
-import {AgregarAlumnosComponent} from "./agregar_alumnos/agregar_alumnos.component";
-import {BuscarAlumnosComponent} from "./buscar_alumnos/buscar_alumnos.component";
-import {EliminarAlumnosComponent} from "./eliminar_alumnos/eliminar_alumnos.component";
-import {ModificarAlumnosComponent} from "./modificar_alumnos/modificar_alumnos.component";
 import {AdminAlumnosService} from './admin_alumnos.service';
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {TextMaskModule} from 'angular2-text-mask';
+import {DatatableComponent} from './../makotos_datatable/makoto_datatable.component';
 
 @NgModule({
   declarations: [
     AdminAlumnosComponent,
-    BuscarAlumnosComponent,
-    AgregarAlumnosComponent,
-    EliminarAlumnosComponent,
-    ModificarAlumnosComponent
+    DatatableComponent
   ],
   imports: [
     BrowserModule,
@@ -28,15 +22,11 @@ import {TextMaskModule} from 'angular2-text-mask';
     ReactiveFormsModule,
     LaddaModule,
     ModalModule,
-    NgxMyDatePickerModule,
+    NgxMyDatePickerModule.forRoot(),
     TextMaskModule
   ],
   exports: [
     AdminAlumnosComponent,
-    BuscarAlumnosComponent,
-    AgregarAlumnosComponent,
-    EliminarAlumnosComponent,
-    ModificarAlumnosComponent
   ],
   providers:[
     AdminAlumnosService
