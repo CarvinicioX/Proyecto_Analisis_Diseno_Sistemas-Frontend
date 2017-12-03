@@ -3,22 +3,16 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {AdminPadresComponent} from "./admin_padres.component";
-import {AgregarPadresComponent} from "./agregar_padres/agregar_padres.component";
-import {BuscarPadresComponent} from "./buscar_padres/buscar_padres.component";
-import {EliminarPadresComponent} from "./eliminar_padres/eliminar_padres.component";
-import {ModificarPadresComponent} from "./modificar_padres/modificar_padres.component";
-import {AdminPadresService} from "./admin_padres.service";
+import {AdminPadresService} from './admin_padres.service';
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
-
+import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {TextMaskModule} from 'angular2-text-mask';
+import {DatatableModule} from './../makotos_datatable/makoto_datatable.module';
 
 @NgModule({
   declarations: [
-    AdminPadresComponent,
-    BuscarPadresComponent,
-    AgregarPadresComponent,
-    EliminarPadresComponent,
-    ModificarPadresComponent
+    AdminPadresComponent
   ],
   imports: [
     BrowserModule,
@@ -26,15 +20,14 @@ import {ModalModule} from 'ngx-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     LaddaModule,
-    ModalModule
+    ModalModule,
+    NgxMyDatePickerModule.forRoot(),
+    TextMaskModule,
+    DatatableModule
   ],
   exports: [
     AdminPadresComponent,
-    BuscarPadresComponent,
-    AgregarPadresComponent,
-    EliminarPadresComponent,
-    ModificarPadresComponent
-    ],
+  ],
   providers:[
     AdminPadresService
   ]

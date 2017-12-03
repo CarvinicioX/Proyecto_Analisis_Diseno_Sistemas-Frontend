@@ -71,6 +71,9 @@ export class DatatableComponent implements OnInit, DoCheck {
   //# edit: Transmite un evento de tipo EDIT al padre cuando se llama la función de editar en un registro de la tabla
   @Output() edit: EventEmitter<number> = new EventEmitter<number>();
   
+  //# edit: Transmite un evento de tipo EDIT al padre cuando se llama la función de editar en un registro de la tabla
+  @Output() add: EventEmitter<number> = new EventEmitter<number>();
+
   //# FINAL  # EVENTOS #
   //####################
 
@@ -198,6 +201,12 @@ export class DatatableComponent implements OnInit, DoCheck {
   edit_event(index){
 
     this.edit.emit(this.data_array[index]);
+  }
+
+  //# edit_event(index): Método que ejecuta el evento de EDIT.
+  add_event(index){
+
+    this.add.emit(this.data_array[index]);
   }
 
   //# filter_search(): Método que filtra la tabla en base al STRING ingresado en el campo de búsqueda

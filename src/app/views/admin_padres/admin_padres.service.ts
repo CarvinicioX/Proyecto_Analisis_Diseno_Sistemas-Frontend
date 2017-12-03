@@ -1,6 +1,6 @@
 //Native imports
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers , RequestOptions} from '@angular/http';
+import { Http, Response, Headers , RequestOptions, URLSearchParams} from '@angular/http';
 
 //Third Party Imports
 import { Observable } from 'rxjs/Observable';
@@ -19,31 +19,45 @@ export class AdminPadresService {
   //Port where the backend server is  running
   private baseUrl: string = "http://DESKTOP-P8O5UJ2:8000";
 
-  insert_padre(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  get_listado_padres():Observable<any>{
+      let params = new URLSearchParams();
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_padre",bodyString, options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_padres", options).map(this.extractData).catch(this.handleError);
   }
 
-  update_padre(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  get_padres(load):Observable<any>{
+      let params = new URLSearchParams();
+      params.set('codigo', load.codigo);
+      params.set('nombre', load.nombre);
+      params.set('direccion', load.direccion);
+      params.set('telefono', load.telefono);
+      params.set('correo', load.email); 
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_padre",bodyString, options).map(this.extractData).catch(this.handleError);
-  }
-
-  delete_padre(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_padre",bodyString, options).map(this.extractData).catch(this.handleError);
-  }
-
-  get_padres():Observable<any>{
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
+      let options = new RequestOptions({ headers: headers, search: params });
       return this.http.get(this.baseUrl+"/get_padres", options).map(this.extractData).catch(this.handleError);
+  }
+
+  post_padres(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.baseUrl+"/insert_padre", bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  update_padres(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.put(this.baseUrl+"/update_padre", bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  delete_padres(load):Observable<any>{
+     let params = new URLSearchParams();
+      params.set('codigo', load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers, search: params });
+      return this.http.delete(this.baseUrl+"/delete_padre", options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object

@@ -1,6 +1,6 @@
 //Native imports
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers , RequestOptions} from '@angular/http';
+import { Http, Response, Headers , RequestOptions, URLSearchParams} from '@angular/http';
 
 //Third Party Imports
 import { Observable } from 'rxjs/Observable';
@@ -19,31 +19,32 @@ export class AdminGradosService {
   //Port where the backend server is  running
   private baseUrl: string = "http://DESKTOP-P8O5UJ2:8000";
 
-  insert_grado(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  get_listado_grados():Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_grado",bodyString, options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_grados", options).map(this.extractData).catch(this.handleError);
   }
 
-  update_grado(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  post_grado(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_grado",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.post(this.baseUrl+"/insert_grado", bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  delete_grado(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  update_grado(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_grado",bodyString, options).map(this.extractData).catch(this.handleError);
+      return this.http.put(this.baseUrl+"/update_grado", bodyString, options).map(this.extractData).catch(this.handleError);
   }
 
-  get_grados():Observable<any>{
+  delete_grado(load):Observable<any>{
+     let params = new URLSearchParams();
+      params.set('codigo', load);
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.baseUrl+"/get_grados", options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers, search: params });
+      return this.http.delete(this.baseUrl+"/delete_grado", options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object

@@ -19,6 +19,13 @@ export class AdminAlumnosService {
   //Port where the backend server is  running
   private baseUrl: string = "http://DESKTOP-P8O5UJ2:8000";
 
+  get_listado_alumnos():Observable<any>{
+      let params = new URLSearchParams();
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_alumnos", options).map(this.extractData).catch(this.handleError);
+  }
+
   get_alumnos(load):Observable<any>{
       let params = new URLSearchParams();
       params.set('codigo', load.codigo);

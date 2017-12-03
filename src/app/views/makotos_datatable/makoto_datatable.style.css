@@ -87,6 +87,15 @@
 	background-color: #FFD9D7;
 }
 
+.makoto-dt-add{
+  color:#1AA345;
+    cursor:pointer;
+}
+
+.makoto-dt-add:hover{
+  background-color: #D2FFE0;
+}
+
 .makoto-dt-footer{
 	display: block;
   	min-height: 32px;
@@ -113,6 +122,15 @@
   	text-decoration: underline !important;
   	background-color: #F0F0F0 !important;
 }
+
+.search-icon{
+  cursor: pointer;
+}
+
+.search-icon:hover{
+  background-color: #F0F0F0 !important;
+}
+
 
 .makoto-dt-no-select{
 	-webkit-touch-callout: none;

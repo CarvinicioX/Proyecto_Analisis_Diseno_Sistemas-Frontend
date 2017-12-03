@@ -1,6 +1,6 @@
 //Native imports
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers , RequestOptions} from '@angular/http';
+import { Http, Response, Headers , RequestOptions, URLSearchParams} from '@angular/http';
 
 //Third Party Imports
 import { Observable } from 'rxjs/Observable';
@@ -19,31 +19,77 @@ export class AdminSeccionesService {
   //Port where the backend server is  running
   private baseUrl: string = "http://DESKTOP-P8O5UJ2:8000";
 
-  insert_seccion(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+ get_listado_alumnos_seccion():Observable<any>{
+      let params = new URLSearchParams();
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/insert_seccion",bodyString, options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_alumnos_seccion", options).map(this.extractData).catch(this.handleError);
   }
 
-  update_seccion(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  get_listado_alumnos():Observable<any>{
+      let params = new URLSearchParams();
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/update_seccion",bodyString, options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_alumnos", options).map(this.extractData).catch(this.handleError);
   }
 
-  delete_seccion(payload: any):Observable<any>{
-      let bodyString = JSON.stringify(payload);
+  get_listado_clases():Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.baseUrl+"/delete_seccion",bodyString, options).map(this.extractData).catch(this.handleError);
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_clases", options).map(this.extractData).catch(this.handleError);
   }
 
-  get_secciones():Observable<any>{
+  get_listado_maestros():Observable<any>{
+      let params = new URLSearchParams();
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_maestros", options).map(this.extractData).catch(this.handleError);
+  }
+
+  get_listado_grados():Observable<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_grados", options).map(this.extractData).catch(this.handleError);
+  }
+
+  get_listado_secciones():Observable<any>{
+      let params = new URLSearchParams();
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers});
+      return this.http.get(this.baseUrl+"/get_listado_secciones", options).map(this.extractData).catch(this.handleError);
+  }
+
+  get_secciones(load):Observable<any>{
+      let params = new URLSearchParams();
+      params.set('codigo', load.codigo);
+      params.set('grado', load.grado);
+      params.set('maestro', load.maestro);
+      params.set('clase', load.clase);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers, search: params });
       return this.http.get(this.baseUrl+"/get_secciones", options).map(this.extractData).catch(this.handleError);
+  }
+
+  post_secciones(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.baseUrl+"/insert_seccion", bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  update_secciones(load):Observable<any>{
+      let bodyString = JSON.stringify(load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.put(this.baseUrl+"/update_seccion", bodyString, options).map(this.extractData).catch(this.handleError);
+  }
+
+  delete_secciones(load):Observable<any>{
+     let params = new URLSearchParams();
+      params.set('codigo', load);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers, search: params });
+      return this.http.delete(this.baseUrl+"/delete_seccion", options).map(this.extractData).catch(this.handleError);
   }
 
   //Extract data as Json object

@@ -160,8 +160,8 @@
                                                             <div class="form-group">
                                                                 <div class="input-group" [ngClass]="{'has-error':(!add_form.controls['nacimiento'].valid || !validate_fecha_nacimiento()) && submit_add}">
                                                                     <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" [formControl]="add_form.controls['nacimiento']" type="text" class="form-control" placeholder="YYYY/MM/DD">      
-                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimientp="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento($event)">
-                                                                    <span (click)="calendario_nacimientp.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimiento2="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento($event)">
+                                                                    <span (click)="calendario_nacimiento2.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
                                                                 </div>
                                                                 <p class="text-danger" *ngIf="add_form.controls['nacimiento'].hasError('required') && submit_add"><i class="fa fa-warning"></i> La fecha de nacimiento es requerida.</p> 
                                                                 <p class="text-danger" *ngIf="add_form.controls['nacimiento'].hasError('pattern') && submit_add"><i class="fa fa-warning"></i> Formato de fecha inválido.</p> 
@@ -259,8 +259,8 @@
                                                             <div class="form-group">
                                                                 <div class="input-group" [ngClass]="{'has-error':(!editar_form.controls['nacimiento'].valid || !validate_fecha_nacimiento_edit()) && submit_edit}">
                                                                     <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" [formControl]="editar_form.controls['nacimiento']" type="text" class="form-control" placeholder="YYYY/MM/DD">      
-                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimientp="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento_edit($event)">
-                                                                    <span (click)="calendario_nacimientp.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                                    <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker formControlName="nacimiento_temporal_reference" [options]="calendario" #calendario_nacimiento="ngx-mydatepicker" (dateChanged)="set_fecha_nacimiento_edit($event)">
+                                                                    <span (click)="calendario_nacimiento.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
                                                                 </div>
                                                                 <p class="text-danger" *ngIf="editar_form.controls['nacimiento'].hasError('required') && submit_edit"><i class="fa fa-warning"></i> La fecha de nacimiento es requerida.</p> 
                                                                 <p class="text-danger" *ngIf="editar_form.controls['nacimiento'].hasError('pattern') && submit_edit"><i class="fa fa-warning"></i> Formato de fecha inválido.</p> 

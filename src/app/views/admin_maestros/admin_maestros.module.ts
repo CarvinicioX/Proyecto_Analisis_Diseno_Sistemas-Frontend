@@ -3,21 +3,16 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {AdminMaestrosComponent} from "./admin_maestros.component";
-import {AgregarMaestrosComponent} from "./agregar_maestros/agregar_maestros.component";
-import {BuscarMaestrosComponent} from "./buscar_maestros/buscar_maestros.component";
-import {EliminarMaestrosComponent} from "./eliminar_maestros/eliminar_maestros.component";
-import {ModificarMaestrosComponent} from "./modificar_maestros/modificar_maestros.component";
 import {AdminMaestrosService} from './admin_maestros.service';
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
+import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {TextMaskModule} from 'angular2-text-mask';
+import {DatatableModule} from './../makotos_datatable/makoto_datatable.module';
+
 @NgModule({
   declarations: [
-    AdminMaestrosComponent,
-    BuscarMaestrosComponent,
-    AgregarMaestrosComponent,
-      EliminarMaestrosComponent,
-    ModificarMaestrosComponent
-
+    AdminMaestrosComponent
   ],
   imports: [
     BrowserModule,
@@ -25,20 +20,18 @@ import {ModalModule} from 'ngx-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     LaddaModule,
-     ModalModule
+    ModalModule,
+    NgxMyDatePickerModule.forRoot(),
+    TextMaskModule,
+    DatatableModule
   ],
   exports: [
     AdminMaestrosComponent,
-    BuscarMaestrosComponent,
-    AgregarMaestrosComponent,
-      EliminarMaestrosComponent,
-    ModificarMaestrosComponent    
   ],
-    providers:[
+  providers:[
     AdminMaestrosService
   ]
 })
-
 
 export class AdminMaestrosModule {
 }

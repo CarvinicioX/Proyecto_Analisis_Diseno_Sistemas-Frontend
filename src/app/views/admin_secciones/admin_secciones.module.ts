@@ -3,20 +3,16 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {AdminSeccionesComponent} from "./admin_secciones.component";
-import {AgregarSeccionesComponent} from "./agregar_secciones/agregar_secciones.component";
-import {BuscarSeccionesComponent} from "./buscar_secciones/buscar_secciones.component";
-import {EliminarSeccionesComponent} from "./eliminar_secciones/eliminar_secciones.component";
-import {ModificarSeccionesComponent} from "./modificar_secciones/modificar_secciones.component";
 import {AdminSeccionesService} from './admin_secciones.service';
 import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
+import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
+import {TextMaskModule} from 'angular2-text-mask';
+import {DatatableModule} from './../makotos_datatable/makoto_datatable.module';
+
 @NgModule({
   declarations: [
-    AdminSeccionesComponent,
-    BuscarSeccionesComponent,
-    AgregarSeccionesComponent,
-    EliminarSeccionesComponent,
-    ModificarSeccionesComponent
+    AdminSeccionesComponent
   ],
   imports: [
     BrowserModule,
@@ -24,20 +20,17 @@ import {ModalModule} from 'ngx-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     LaddaModule,
-    ModalModule
+    ModalModule,
+    NgxMyDatePickerModule.forRoot(),
+    TextMaskModule,
+    DatatableModule
   ],
   exports: [
     AdminSeccionesComponent,
-    BuscarSeccionesComponent,
-    AgregarSeccionesComponent,
-    EliminarSeccionesComponent,
-    ModificarSeccionesComponent
-
   ],
   providers:[
-  	AdminSeccionesService
+    AdminSeccionesService
   ]
-
 })
 
 export class AdminSeccionesModule {

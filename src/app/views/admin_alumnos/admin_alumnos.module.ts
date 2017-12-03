@@ -8,12 +8,11 @@ import {LaddaModule} from 'angular2-ladda';
 import {ModalModule} from 'ngx-bootstrap';
 import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
 import {TextMaskModule} from 'angular2-text-mask';
-import {DatatableComponent} from './../makotos_datatable/makoto_datatable.component';
+import {DatatableModule} from './../makotos_datatable/makoto_datatable.module';
 
 @NgModule({
   declarations: [
-    AdminAlumnosComponent,
-    DatatableComponent
+    AdminAlumnosComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +22,8 @@ import {DatatableComponent} from './../makotos_datatable/makoto_datatable.compon
     LaddaModule,
     ModalModule,
     NgxMyDatePickerModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    DatatableModule
   ],
   exports: [
     AdminAlumnosComponent,

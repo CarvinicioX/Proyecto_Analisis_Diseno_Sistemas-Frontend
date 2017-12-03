@@ -8,66 +8,106 @@
         </ol>
     </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="well white-bg">
+            <div class="well white-bg animated fadeInRight extra-padding">
                 <div class = "row">
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget navy-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_clases/agregar_clases']">
+                    <div class="col-xs-12">
+                        <div class=" menu-container no-select">
+                            <div class="menu-start">
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                                <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                            </div>
+                            <div class="menu-item text-center" (click)="open_add()">
+                                <h2 class="no-margins text-color-blue"><i class="fa fa-plus-square"></i></h2>
+                                <p class="menu-text no-margins">Agregar</p>
+                            </div>
+                            <div bsModal #agregar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Agregar Clases</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="add_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <label><b>Nombre</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!add_form.controls['nombre'].valid || !validate_trim(add_form.controls['nombre'].value)) && submit_add}">
+                                                                    <input [formControl]="add_form.controls['nombre']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(add_form.controls['nombre'].hasError('required')||!validate_trim(add_form.controls['nombre'].value)) && submit_add"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" (click)="close_add()">Cancelar</button>
+                                            <button type="button" class="btn btn-info" (click)="clean_add()">Limpiar Campos</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="do_add()">Agregar Clase</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div class="m-b-md">
-                                <i class="fa fa-plus fa-4x"></i>
-
-                                <h1 class="m-xs">Agregar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Clase
-                                </h3>
+                            <div bsModal #editar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><b>Editar Clases</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-content">
+                                                <form novalidate="novalidate" novalidate="novalidate" role="form" [formGroup]="editar_form">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label><b>Código</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input [formControl]="editar_form.controls['codigo']" class="form-control" type="text" maxlength="10">
+                                                                    <span class="input-group-addon"><i class="fa fa-codepen"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <label><b>Nombre</b></label>
+                                                            <div class="form-group">
+                                                                <div class="input-group" [ngClass]="{'has-error':(!editar_form.controls['nombre'].valid || !validate_trim(editar_form.controls['nombre'].value)) && submit_edit}">
+                                                                    <input [formControl]="editar_form.controls['nombre']" class="form-control" type="text" maxlength="50">
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                </div>
+                                                                <p class="text-danger" *ngIf="(editar_form.controls['nombre'].hasError('required')||!validate_trim(editar_form.controls['nombre'].value)) && submit_edit"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" (click)="close_edit()">Cancelar</button>
+                                            <button [ladda]="loading_edit" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="do_edit()">Editar Clase</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget yellow-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_clases/modificar_clases']">
-                            <div class="m-b-md">
-                                <i class="fa fa-edit fa-4x"></i>
-
-                                <h1 class="m-xs">Modificar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Clase
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget lazur-bg p-lg text-center widget-element " [routerLink]="['/plataforma/admin_clases/buscar_clases']">
-                            <div class="m-b-md">
-                                <i class="fa fa-search fa-4x"></i>
-
-                                <h1 class="m-xs">Buscar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Clase
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-lg-3">
-                        <div class="widget red-bg p-lg text-center widget-element" [routerLink]="['/plataforma/admin_clases/eliminar_clases']">
-                            <div class="m-b-md">
-                                <i class="fa fa-trash fa-4x"></i>
-
-                                <h1 class="m-xs">Eliminar</h1>
-
-                                <h3 class="font-bold no-margins">
-                                    Clase
-                                </h3>
-                            </div>
-                        </div>
+                        <makoto-datatable [data_array]="resultados" [options]="datatable_options" [loading]="{loading:resultados_loading}" (delete)="delete_alumno($event)" (view)="open_view($event)" (edit)="open_edit($event)" #datatable></makoto-datatable>
                     </div>
                 </div>
             </div> 
         </div>
     </div>
 </div>
+

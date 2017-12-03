@@ -63,7 +63,7 @@
                         <tr>
                             <th *ngFor="let header of options_value.columns;let i = index" class="makoto-dt-no-select makoto-dt-sort-header" (click)="sort_column(i)">
                                 {{options_value.columns_headers[i]}} <i class= "fa" [ngClass]="{'fa-arrow-up':ascendent && order==options_value.columns[i], 'fa-arrow-down':!ascendent && order==options_value.columns[i], 'fa-sort':order!=options_value.columns[i]}"></i></th>
-                            <th *ngIf="options_value.options.view || options_value.options.edit || options_value.options.delete" class="no-select text-center makoto-dt-options-header" colspan="999">{{options_value.options_header}}</th>
+                            <th *ngIf="options_value.options.view || options_value.options.edit || options_value.options.delete || options_value.options.add" class="no-select text-center makoto-dt-options-header" colspan="999">{{options_value.options_header}}</th>
                         </tr>
                     </thead>
                     <!--FINAL ENCABEZADO DE TABLA-->
@@ -72,9 +72,10 @@
                         <tr *ngFor="let x of displaying; let i = index">
                             <td *ngFor="let column of options_value.columns" class='makoto-dt-table'>{{resultados[requestOffsetLeft -1 + i][column]}}</td>
 
-                            <td *ngIf="options_value.options.view" (click)="view_event(i)" class="text-center makoto-dt-open makoto-dt-table"><i class="fa fa-search"></i></td>
-                            <td *ngIf="options_value.options.edit" (click)="edit_event(i)" class="text-center makoto-dt-edit makoto-dt-table"><i class="fa fa-edit"></i></td>
-                            <td *ngIf="options_value.options.delete" (click)="delete_event(i)" class="text-center makoto-dt-delete makoto-dt-table"><i class="fa fa-trash-o"></i></td>
+                            <td *ngIf="options_value.options.view" (click)="view_event(requestOffsetLeft -1 + i)" class="text-center makoto-dt-open makoto-dt-table"><i class="fa fa-search"></i></td>
+                            <td *ngIf="options_value.options.edit" (click)="edit_event(requestOffsetLeft -1 + i)" class="text-center makoto-dt-edit makoto-dt-table"><i class="fa fa-edit"></i></td>
+                            <td *ngIf="options_value.options.delete" (click)="delete_event(requestOffsetLeft -1 + i)" class="text-center makoto-dt-delete makoto-dt-table"><i class="fa fa-trash-o"></i></td>
+                            <td *ngIf="options_value.options.add" (click)="add_event(requestOffsetLeft -1 + i)" class="text-center makoto-dt-add makoto-dt-table"><i class="fa fa-plus"></i></td>
                         </tr>
                     </tbody>
                     <!--FINAL ENCABEZADO DE CUERPO-->
