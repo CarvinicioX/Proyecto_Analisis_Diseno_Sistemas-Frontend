@@ -5,6 +5,8 @@ import {Routes} from "@angular/router";
 import {LoginComponent} from "./views/login/login.component";
 import {RegisterComponent} from "./views/register/register.component";
 import {AdministracionComponent} from "./views/administracion/administracion.component";
+import {CursosComponent} from "./views/cursos/cursos.component";
+import {CursoComponent} from "./views/curso/curso.component";
 import {HomeComponent} from "./views/home/home.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
 
@@ -33,6 +35,8 @@ export const ROUTES:Routes = [
   	{path: 'plataforma', component: BasicLayoutComponent, 
     children: [
       	{path: 'administracion', component: AdministracionComponent},
+        {path: 'mis_cursos', component: CursosComponent},
+        {path: 'curso/:id', component: CursoComponent},
       	{path: 'inicio', component: HomeComponent},
       	{path: 'admin_secciones', component: AdminSeccionesComponent},
         {path: 'admin_alumnos', component: AdminAlumnosComponent},

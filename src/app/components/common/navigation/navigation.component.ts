@@ -29,6 +29,11 @@ export class NavigationComponent {
     }
   }
 
+  get_perfil(){
+    var login = JSON.parse(sessionStorage.getItem('loginInfo'));
+    return login.perfil_id;
+  }
+
   //activeRoyute(string): get true if route is active
   activeRoute(routename: string): boolean{
     return this.router.url.indexOf(routename) > -1;

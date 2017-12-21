@@ -12,6 +12,8 @@ import {AppComponent} from './app.component';
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {AdministracionModule} from "./views/administracion/administracion.module";
+import {CursosModule} from "./views/cursos/cursos.module";
+import {CursoModule} from "./views/curso/curso.module";
 import {HomeModule} from "./views/home/home.module";
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import {AdminSeccionesModule} from "./views/admin_secciones/admin_secciones.module";
@@ -34,6 +36,8 @@ import {AdminPadresModule} from "./views/admin_padres/admin_padres.module";
     LoginModule,
     RegisterModule,
     AdministracionModule,
+    CursosModule,
+    CursoModule,
     HomeModule,
     AdminSeccionesModule,
     AdminAlumnosModule,

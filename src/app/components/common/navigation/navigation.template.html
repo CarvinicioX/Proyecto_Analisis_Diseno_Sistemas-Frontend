@@ -16,8 +16,11 @@
       <li  [ngClass]="{active: activeRoute('inicio')}">
         <a [routerLink]="['/plataforma/inicio']"><i class="fa fa-comment"></i> <span class="nav-label">Notificaciones</span></a>
       </li>
-      <li [ngClass]="{active: activeRoute('administracion')||activeRoute('admin_secciones')||activeRoute('admin_alumnos') ||activeRoute('admin_grados') ||activeRoute('admin_clases')||activeRoute('admin_maestros')||activeRoute('admin_padres')}">
+      <li *ngIf="get_perfil() == 1" [ngClass]="{active: activeRoute('administracion')||activeRoute('admin_secciones')||activeRoute('admin_alumnos') ||activeRoute('admin_grados') ||activeRoute('admin_clases')||activeRoute('admin_maestros')||activeRoute('admin_padres')}">
         <a [routerLink]="['/plataforma/administracion']"><i class="fa fa-cogs"></i> <span class="nav-label">Administración</span></a>
+      </li>
+      <li  *ngIf="get_perfil() == 3" [ngClass]="{active: activeRoute('mis_cursos')|| activeRoute('curso')}">
+        <a [routerLink]="['/plataforma/mis_cursos']"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Mis Cursos</span></a>
       </li>
       <!-- End Navbar Items -->
     </ul>

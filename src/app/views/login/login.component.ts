@@ -92,8 +92,8 @@ export class LoginComponent implements OnInit{
       ()=> {
         if(response && response!=-1){
           sessionStorage.setItem('userInfo', JSON.stringify(response));
-          console.log(sessionStorage.getItem('userInfo'));
-          console.log(sessionStorage.getItem('loginInfo'));
+          console.log(JSON.parse(sessionStorage.getItem('userInfo')));
+          console.log(JSON.parse(sessionStorage.getItem('loginInfo')));
           this.loader = false;
           this.router.navigateByUrl('/plataforma/inicio');
         }else{

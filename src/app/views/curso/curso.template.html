@@ -1,0 +1,584 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><i class="fa fa-graduation-cap"></i> <b>{{curso.codigo}}</b> - {{curso.clase}} </h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <h4>{{curso.grado}} : {{curso.maestro}}</h4>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class=" menu-container no-select">
+                <div class="menu-start">
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                    <h4 class="no-margins start-cont"><i class="fa fa-th-large"></i></h4>
+                </div>
+                <div class="menu-item text-center" (click)="open_alumnos()">
+                    <h2 class="no-margins text-color-blue"><i class="fa fa-users"></i></h2>
+                    <p class="menu-text no-margins">Alumnos</p>
+                </div>
+                <div class="menu-item text-center">
+                    <h2 class="no-margins text-color-green"><i class="fa fa-bullhorn"></i></h2>
+                    <p class="menu-text no-margins">Boletín</p>
+                </div>
+            </div>
+
+            <div class="ibox product-detail">
+                <div bsModal #alumnos_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Alumnos del Curso</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <b>Nombre</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Apellido</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Nacimiento</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Código</b>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" *ngFor="let alumno of alumnos;let i = index">
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].nombres}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].apellidos}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].nacimiento.substring(0,10)}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].codigo}}
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_alumnos()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div bsModal #calificar_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Calificar Tarea</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <b>Nombre</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Código</b>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" *ngFor="let alumno of alumnos;let i = index">
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].nombres}} {{alumnos[i].apellidos}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{alumnos[i].codigo}}
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <input [(ngModel)]="alumnos[i]['nota'+i+tareas[current_tarea].codigo]" [textMask]="{mask:valor_mask}" class="form-control" type="text" maxlength="3" required>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" class="btn btn-info btn-sm">Descargar</button>
+                                            <button type="button" class="btn btn-primary btn-sm" (click)="calificar(alumnos[i].codigo, tareas[current_tarea].codigo, alumnos[i]['nota'+i+tareas[current_tarea].codigo])">Calificar</button>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_calificar()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div bsModal #ver_notas_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Ver Notas</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <b>Nombre</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Código</b>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <b>Puntuación</b>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" *ngFor="let nota of notas;let i = index">
+                                        <div class="col-sm-3">
+                                            {{nota.nombres}} {{nota.apellidos}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{nota.codigo[1]}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{nota.valor}}
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_notas()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div bsModal #agregar_tarea_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Agregar Tarea</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <form novalidate="novalidate" #add_tarea_form="ngForm">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Nombre</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(nombre.invalid || !validate_trim(tarea_object.nombre)) && submit_add_tarea}">
+                                                        <input #nombre="ngModel" name="nombre" [(ngModel)]="tarea_object.nombre" class="form-control" type="text" maxlength="50" required>
+                                                        <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="(nombre.invalid||!validate_trim(tarea_object.nombre)) && submit_add_tarea"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <label><b>Valor</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(valor.invalid || !validate_trim(tarea_object.valor)) && submit_add_tarea}">
+                                                        <input [textMask]="{mask:valor_mask}" #valor="ngModel" name="valor" [(ngModel)]="tarea_object.valor" class="form-control" type="text" maxlength="3" required>
+                                                        <span class="input-group-addon"><i class="fa fa-hashtag"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="(valor.invalid||!validate_trim(tarea_object.valor)) && submit_add_tarea"><i class="fa fa-warning"></i> El valor es requerido.</p> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha de Inicio</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(fecha_inicio.invalid && submit_add_tarea)}">
+                                                        <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" #fecha_inicio="ngModel" name="fecha_inicio" [(ngModel)]="tarea_object.fecha_inicio" type="text" class="form-control" placeholder="YYYY/MM/DD" pattern="([0-9]{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|30|31)" required>      
+                                                        <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker [options]="calendario" #calendario_inicio="ngx-mydatepicker" (dateChanged)="set_fecha_inicio($event)">
+                                                        <span (click)="calendario_inicio.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="fecha_inicio.errors && fecha_inicio.errors.required && submit_add_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                    <p class="text-danger" *ngIf="fecha_inicio.errors && fecha_inicio.errors.pattern && submit_add_tarea"><i class="fa fa-warning"></i> Formato de fecha inválido.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha de Entrega</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(fecha_final.invalid && submit_add_tarea)}">
+                                                        <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" #fecha_final="ngModel" name="fecha_final" [(ngModel)]="tarea_object.fecha_final" type="text" class="form-control" placeholder="YYYY/MM/DD" pattern="([0-9]{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|30|31)" required>      
+                                                        <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker [options]="calendario" #calendario_final="ngx-mydatepicker" (dateChanged)="set_fecha_final($event)">
+                                                        <span (click)="calendario_final.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="fecha_final.errors && fecha_final.errors.required && submit_add_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                    <p class="text-danger" *ngIf="fecha_final.errors && fecha_final.errors.pattern && submit_add_tarea"><i class="fa fa-warning"></i> Formato de fecha inválido.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label><b>Descripción</b></label>
+                                                <div class="form-group">
+                                                    <div [ngClass]="{'has-error':(descripcion.invalid || !validate_trim(tarea_object.descripcion)) && submit_add_tarea}">
+                                                        <textarea #descripcion="ngModel" name="descripcion" [(ngModel)]="tarea_object.descripcion" class="form-control" type="text" maxlength="500" rows="4" required></textarea>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="descripcion.errors && descripcion.errors.required && submit_add_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-center">
+                                                <input type="file" name="file" id="file_ref" class="inputfile" #file_ref_2 />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_tarea_add()">Cancelar</button>
+                                <button type="button" class="btn btn-info" (click)="clean_tarea_add()">Limpiar Campos</button>
+                                <button [ladda]="loading_add" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="tarea_add()">Agregar Tarea</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div bsModal #editar_tarea_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Editar Tarea</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <form novalidate="novalidate" #editar_tarea_form="ngForm">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label><b>Código</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="codigo2" [(ngModel)]="tarea_object_edit.codigo" class="form-control" type="text" readonly="">
+                                                        <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Nombre</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(nombre2.invalid) && submit_edit_tarea}">
+                                                        <input #nombre2="ngModel" name="nombre2" [(ngModel)]="tarea_object_edit.nombre" class="form-control" type="text" maxlength="50" required>
+                                                        <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="nombre2.invalid && submit_edit_tarea"><i class="fa fa-warning"></i> El nombre es requerido.</p> 
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <label><b>Valor</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(valor2.invalid) && submit_edit_tarea}">
+                                                        <input [textMask]="{mask:valor_mask}" #valor2="ngModel" name="valor2" [(ngModel)]="tarea_object_edit.valor" class="form-control" type="text" maxlength="3" required>
+                                                        <span class="input-group-addon"><i class="fa fa-hashtag"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="valor2.invalid && submit_edit_tarea"><i class="fa fa-warning"></i> El valor es requerido.</p> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha de Inicio</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(fecha_inicio2.invalid && submit_edit_tarea)}">
+                                                        <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" #fecha_inicio2="ngModel" name="fecha_inicio2" [(ngModel)]="tarea_object_edit.fecha_inicio" type="text" class="form-control" placeholder="YYYY/MM/DD" pattern="([0-9]{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|30|31)" required>      
+                                                        <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker [options]="calendario" #calendario_inicio="ngx-mydatepicker" (dateChanged)="set_fecha_inicio($event)">
+                                                        <span (click)="calendario_inicio.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="fecha_inicio2.errors && fecha_inicio2.errors.required && submit_edit_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                    <p class="text-danger" *ngIf="fecha_inicio2.errors && fecha_inicio2.errors.pattern && submit_edit_tarea"><i class="fa fa-warning"></i> Formato de fecha inválido.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha de Entrega</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group" [ngClass]="{'has-error':(fecha_final2.invalid && submit_edit_tarea)}">
+                                                        <input [textMask]="{mask:fecha_mask, keepCharPositions:true}" #fecha_final2="ngModel" name="fecha_final2" [(ngModel)]="tarea_object_edit.fecha_final" type="text" class="form-control" placeholder="YYYY/MM/DD" pattern="([0-9]{4})-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|30|31)" required>      
+                                                        <input [hidden]="true" ngx-mydatepicker ngx-mydatepicker [options]="calendario" #calendario_final="ngx-mydatepicker" (dateChanged)="set_fecha_final($event)">
+                                                        <span (click)="calendario_final.toggleCalendar()" class="input-group-addon hover-icon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="fecha_final2.errors && fecha_final2.errors.required && submit_edit_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                    <p class="text-danger" *ngIf="fecha_final2.errors && fecha_final2.errors.pattern && submit_edit_tarea"><i class="fa fa-warning"></i> Formato de fecha inválido.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label><b>Descripción</b></label>
+                                                <div class="form-group">
+                                                    <div [ngClass]="{'has-error':(descripcion2.invalid) && submit_edit_tarea}">
+                                                        <textarea #descripcion2="ngModel" name="descripcion2" [(ngModel)]="tarea_object_edit.descripcion" class="form-control" type="text" maxlength="500" rows="4" required></textarea>
+                                                    </div>
+                                                    <p class="text-danger" *ngIf="descripcion2.errors && descripcion2.errors.required && submit_edit_tarea"><i class="fa fa-warning"></i> La fecha de inicio es requerida.</p> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-center">
+                                                <input type="file" name="file" id="file_ref" class="inputfile" #file_ref_2 />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_tarea_edit()">Cancelar</button>
+                                <button [ladda]="loading_add" data-size="s" data-style="slide-left" type="button" class="btn btn-success" (click)="tarea_edit()">Editar Tarea</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div bsModal #view_tarea_modal="bs-modal" [config]="{backdrop: 'static', keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center"><b>Ver Tarea</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-content">
+                                    <form novalidate="novalidate" novalidate="novalidate" role="form" #view_tarea_form="ngForm">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Código</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="codigo3" [(ngModel)]="tarea_object.codigo" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-cube"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Nombre</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="nombre3" [(ngModel)]="tarea_object.nombre" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-cube"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label><b>Valor</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="valor3" [(ngModel)]="tarea_object.valor" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-cube"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha Inicio</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="fecha_inicio3" [(ngModel)]="tarea_object.fecha_inicio" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label><b>Fecha Final</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="fecha_final3" [(ngModel)]="tarea_object.fecha_final" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label><b>Descripción</b></label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input name="descripcion3" [(ngModel)]="tarea_object.descripcion" class="form-control" type="text" readonly>
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 text-center">
+                                                <button type="button" class="btn btn-info">Descargar Archivo</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="close_tarea_view()">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content-parcial white-bg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="font-bold m-b-xs"> Primer Parcial </h2>
+                            <hr>
+                            <h3><i class="fa fa-file-text-o"></i> Tareas</h3>
+                            <div *ngFor="let tarea of tareas; let i = index">
+                                <div *ngIf="tarea.parcial == 1">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h4><b>{{i+1}} - {{tarea.nombre}}</b></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4><b>Desde</b> - {{tarea.fecha_inicio}} : <b>Hasta</b> - {{tarea.fecha_final}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p class="text-justify">{{tarea.descripcion}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-info btn-sm" (click)="tarea_view(i)">Ver Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-warning btn-sm" (click)="open_tarea_edit(i)">Modificar Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-danger btn-sm" (click)="tarea_delete(i)">Eliminar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="open_calificar(i)">Calificar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="ver_notas(i)">Ver Notas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr *ngIf="tarea.parcial == 1">
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm pull-right" (click)="open_tarea_add(1)">Agregar Tarea</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content-parcial white-bg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="font-bold m-b-xs"> Segundo Parcial </h2>
+                            <hr>
+                            <h3><i class="fa fa-file-text-o"></i> Tareas</h3>
+                            <div *ngFor="let tarea of tareas; let i = index">
+                                <div *ngIf="tarea.parcial == 2">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h4><b>{{i+1}} - {{tarea.nombre}}</b></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4><b>Desde</b> - {{tarea.fecha_inicio}} : <b>Hasta</b> - {{tarea.fecha_final}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p class="text-justify">{{tarea.descripcion}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-info btn-sm" (click)="tarea_view(i)">Ver Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-warning btn-sm" (click)="open_tarea_edit(i)">Modificar Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-danger btn-sm" (click)="tarea_delete(i)">Eliminar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="open_calificar(i)">Calificar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="ver_notas(i)">Ver Notas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr *ngIf="tarea.parcial == 2">
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm pull-right" (click)="open_tarea_add(2)">Agregar Tarea</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content-parcial white-bg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="font-bold m-b-xs"> Tercer Parcial </h2>
+                            <hr>
+                            <h3><i class="fa fa-file-text-o"></i> Tareas</h3>
+                            <div *ngFor="let tarea of tareas; let i = index">
+                                <div *ngIf="tarea.parcial == 3">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h4><b>{{i+1}} - {{tarea.nombre}}</b></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4><b>Desde</b> - {{tarea.fecha_inicio}} : <b>Hasta</b> - {{tarea.fecha_final}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p class="text-justify">{{tarea.descripcion}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-info btn-sm" (click)="tarea_view(i)">Ver Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-warning btn-sm" (click)="open_tarea_edit(i)">Modificar Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-danger btn-sm" (click)="tarea_delete(i)">Eliminar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="open_calificar(i)">Calificar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="ver_notas(i)">Ver Notas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr *ngIf="tarea.parcial == 3">
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm pull-right" (click)="open_tarea_add(3)">Agregar Tarea</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content-parcial white-bg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="font-bold m-b-xs"> Cuarto Parcial </h2>
+                            <hr>
+                            <h3><i class="fa fa-file-text-o"></i> Tareas</h3>
+                            <div *ngFor="let tarea of tareas; let i = index">
+                                <div *ngIf="tarea.parcial == 4">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h4><b>{{i+1}} - {{tarea.nombre}}</b></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4><b>Desde</b> - {{tarea.fecha_inicio}} : <b>Hasta</b> - {{tarea.fecha_final}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p class="text-justify">{{tarea.descripcion}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-info btn-sm" (click)="tarea_view(i)">Ver Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-warning btn-sm" (click)="open_tarea_edit(i)">Modificar Tarea</button>
+                                            <button [ladda]="loading_add" data-size="s" data-style="slide-left" class="btn btn-danger btn-sm" (click)="tarea_delete(i)">Eliminar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="open_calificar(i)">Calificar Tarea</button>
+                                            <button class="btn btn-success btn-lg" (click)="ver_notas(i)">Ver Notas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr *ngIf="tarea.parcial == 4">
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm pull-right" (click)="open_tarea_add(4)">Agregar Tarea</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
